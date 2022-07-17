@@ -1,0 +1,17 @@
+﻿@using MVC.Services.Interfaces
+@model MVC.ViewModels.CustomerBasket
+@inject IIdentityParser<ApplicationUser> UserManager
+
+@{
+     ViewData["Title"] = "My Basket";
+     var headerList = new List<Header>() {
+          new Header() { Controller = "Catalog", Text = "Back to catalog" }};
+}
+
+<form method="post" id="basketForm">
+    <div class="esh-basket">
+        <partial name="_Header" model="headerList"/>
+
+        @await Component.InvokeAsync("BasketList", new { user = UserManager.Parse(User) })
+    </div>
+</form>

@@ -1,0 +1,13 @@
+﻿.esh-app-footer {
+  color:#FFFFFF;
+  background-color: #452505;
+  border-top: 1px solid #EEEEEE;
+  margin-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  padding-top: 2.5rem;
+  width: 100%;
+}
+
+.esh-app-header {
+  margin: 15px;
+}

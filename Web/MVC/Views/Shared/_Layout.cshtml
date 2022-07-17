@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eShop</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/app.css" />
+        <link rel="stylesheet" href="~/css/app.component.css" />
+        <link rel="stylesheet" href="~/css/shared/components/header/header.css" />
+        <link rel="stylesheet" href="~/css/shared/components/pager/pager.css" />
+        <link rel="stylesheet" href="~/css/catalog/catalog.component.css" />
+        <link rel="stylesheet" href="~/css/override.css" type="text/css" />
+        <link rel="stylesheet" href="~/css/site.min.css" type="text/css" />
+
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/override.css" type="text/css" />
+    </environment>
+</head>
+<body>
+    <header class="esh-app-header">
+        <div class="container">
+            <article class="row">
+
+                <section class="col-lg-7 col-md-6 col-12">
+                    <a class="navbar-brand" routerLink="catalog">
+                        <a asp-area="" asp-controller="Catalog" asp-action="Index">
+                            <img src="~/images/brand.png" />
+                        </a>
+                    </a>
+                </section>
+                
+                @await Html.PartialAsync("_LoginPartial")
+            </article>
+        </div>
+    </header>
+
+    @RenderBody()
+
+
+    <footer class="esh-app-footer">
+        <div class="container">
+          <div class="row row-30">
+            <div class="col-md-4 col-xl-5">
+              <div class="pr-xl-4">
+                <p>This is boardgames website</p>
+                <p class="rights"><span>©  </span><span class="copyright-year">2022</span><span> </span><span>Company</span><span> - </span><span>All Rights Reserved.</span></p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Contacts</h5>
+              <dl class="contact-list">
+                <dt>Address:</dt>
+                <dd>2306 Farm Meadow Drive, Shelbyville, USA</dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>Email:</dt>
+                <dd><a href="mailto:#">boardgamescompany@email.com</a></dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>Phones:</dt>
+                <dd><a href="tel:#">892.255.2977</a>
+                </dd>
+              </dl>
+            </div>
+    </footer>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
