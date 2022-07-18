@@ -11,13 +11,11 @@ public class CatalogService : ICatalogService
 {
     private readonly IOptions<AppSettings> _settings;
     private readonly IHttpClientService _httpClient;
-    private readonly ILogger<CatalogService> _logger;
 
-    public CatalogService(IHttpClientService httpClient, ILogger<CatalogService> logger, IOptions<AppSettings> settings)
+    public CatalogService(IHttpClientService httpClient, IOptions<AppSettings> settings)
     {
         _httpClient = httpClient;
         _settings = settings;
-        _logger = logger;
     }
 
     public async Task<Catalog> GetCatalogItems(int page, int take, int? category, int? mechanic, int sort)
@@ -34,7 +32,7 @@ public class CatalogService : ICatalogService
             filters.Add(CatalogTypeFilter.Mechanic, mechanic.Value);
         }
         
-        var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/items",
+        var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/Items",
            HttpMethod.Post, 
            new PaginatedItemsRequest<CatalogTypeFilter>()
             {
@@ -50,7 +48,7 @@ public class CatalogService : ICatalogService
     public async Task<IEnumerable<SelectListItem>> GetCategories()
     {
         var result = await _httpClient.SendAsync<ItemsListResponse<CatalogCategory>, object?>(
-            $"{_settings.Value.CatalogUrl}/getCategories",
+            $"{_settings.Value.CatalogUrl}/GetCategories",
             HttpMethod.Post,
             null
             );
@@ -72,7 +70,7 @@ public class CatalogService : ICatalogService
     public async Task<IEnumerable<SelectListItem>> GetMechanics()
     {
         var result = await _httpClient.SendAsync<ItemsListResponse<CatalogMechanic>, object?>(
-            $"{_settings.Value.CatalogUrl}/getMechanics",
+            $"{_settings.Value.CatalogUrl}/GetMechanics",
             HttpMethod.Post,
             null
             );
@@ -93,8 +91,7 @@ public class CatalogService : ICatalogService
 
     public async Task<CatalogItem> GetItem(int id)
     {
-        var result = await _httpClient.SendAsync<CatalogItem, object?>(
-            $"{_settings.Value.CatalogUrl}/GetItem",
+        var result = await _httpClient.SendAsync<CatalogItem, GetItemRequest?>($"{_settings.Value.CatalogUrl}/GetItem",
             HttpMethod.Post,
             new GetItemRequest
             {
@@ -106,7 +103,6 @@ public class CatalogService : ICatalogService
 
     public IEnumerable<SelectListItem> GetSortTypes()
     {
-        var values = Enum.GetNames(typeof(SortType));
         var list = new List<SelectListItem>();
         list.Add(new SelectListItem() { Text = "All" });
         foreach (int item in Enum.GetValues(typeof(SortType)))
