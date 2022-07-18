@@ -49,4 +49,13 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
             };
         });
     }
+
+    public async Task<CatalogItemDto?> GetItemAsync(int id)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.GetItemAsync(id);
+            return _mapper.Map<CatalogItemDto>(result);
+        });
+    }
 }
