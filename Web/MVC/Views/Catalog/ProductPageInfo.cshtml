@@ -1,0 +1,27 @@
+﻿@model CatalogItem
+
+<form asp-controller="Basket"
+      asp-action="AddToBasket"
+      asp-route-id = "@Model.Id"
+      asp-route-name = "@Model.Name"
+      asp-route-price = "@Model.Price"
+      asp-route-pictureUrl = "@Model.PictureUrl">
+    <article class="esh-basket-titles row">
+            <section class="esh-basket-title col-2"></section>
+            <section class="esh-basket-title col-3" style="text-align:center">Product</section>
+            <section class="esh-basket-title col-4" style="text-align:center">Description</section>
+            <section class="esh-basket-title col-3">Price</section>
+     </article>
+      <article class="esh-basket-items  row" style="height: 250px;">
+            <section class="esh-basket-item esh-basket-item--middle col-lg-2 hidden-lg-down">
+                <img class="esh-basket-image" src="@Model.PictureUrl" style="width: 200px; height: 200px;" />
+            </section>
+            <section class="esh-basket-item esh-basket-item--middle col-3" style="text-align:center">@Model.Name</section>
+            <section class="esh-basket-item esh-basket-item--middle col-4">@Model.Description</section>
+            <section class="esh-basket-item esh-basket-item--middle col-3">$ @Model.Price.ToString("N2")</section>
+        </article>
+
+    <input class="esh-catalog-button @((!User.Identity.IsAuthenticated) ? "is-disabled" : "")" 
+           type="submit" 
+           value="[ ADD TO BASKET ]" />
+</form>
