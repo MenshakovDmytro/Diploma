@@ -8,14 +8,10 @@ namespace Catalog.Host.Repositories;
 public class CatalogItemRepository : ICatalogItemRepository
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly ILogger<CatalogItemRepository> _logger;
 
-    public CatalogItemRepository(
-        IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
-        ILogger<CatalogItemRepository> logger)
+    public CatalogItemRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
     {
         _dbContext = dbContextWrapper.DbContext;
-        _logger = logger;
     }
 
     public async Task<int?> AddAsync(string name, string description, decimal price, int availableStock, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
@@ -113,5 +109,15 @@ public class CatalogItemRepository : ICatalogItemRepository
             .ToListAsync();
 
         return new ItemsList<CatalogItem>() { TotalCount = items.Count, Data = items };
+    }
+
+    public async Task<CatalogItem?> GetItemAsync(int id)
+    {
+        var item = await _dbContext.CatalogItems
+            .Include(i => i.CatalogCategory)
+            .Include(i => i.CatalogMechanic)
+            .FirstOrDefaultAsync(f => f.Id == id);
+
+        return item;
     }
 }
