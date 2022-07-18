@@ -48,4 +48,15 @@ public class CatalogController : Controller
 
         return View(vm);
     }
+
+    public async Task<IActionResult> ProductPageInfo(int id)
+    {
+        var product = await _catalogService.GetItem(id);
+        if (product == null)
+        {
+            return View("Error");
+        }
+
+        return View(product);
+    }
 }
