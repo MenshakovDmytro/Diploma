@@ -1,7 +1,6 @@
-﻿namespace MVC.Models.Requests
+﻿namespace MVC.Models.Requests;
+
+public class GetItemRequest
 {
-    public class GetItemRequest
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }
