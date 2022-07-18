@@ -12,17 +12,20 @@ public class CatalogBffController : ControllerBase
 {
     private readonly ILogger<CatalogBffController> _logger;
     private readonly ICatalogService _catalogService;
+    private readonly ICatalogItemService _catalogItemService;
     private readonly ICatalogCategoryService _catalogCategoryService;
     private readonly ICatalogMechanicService _catalogMechanicService;
 
     public CatalogBffController(
         ILogger<CatalogBffController> logger,
         ICatalogService catalogService,
+        ICatalogItemService catalogItemService,
         ICatalogCategoryService catalogCategoryService,
         ICatalogMechanicService catalogMechanicService)
     {
         _logger = logger;
         _catalogService = catalogService;
+        _catalogItemService = catalogItemService;
         _catalogCategoryService = catalogCategoryService;
         _catalogMechanicService = catalogMechanicService;
     }
@@ -32,6 +35,14 @@ public class CatalogBffController : ControllerBase
     public async Task<IActionResult> Items(PaginatedItemsRequest<CatalogTypeFilter> request)
     {
         var result = await _catalogService.GetCatalogItemsAsync(request.PageSize, request.PageIndex, request.Filters, request.Sort);
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(CatalogItemDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetItem(GetItemRequest request)
+    {
+        var result = await _catalogItemService.GetItemAsync(request.Id);
         return Ok(result);
     }
 
