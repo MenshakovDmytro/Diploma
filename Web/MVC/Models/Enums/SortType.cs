@@ -2,6 +2,8 @@
 
 public enum SortType
 {
-    Ascending = 1,
-    Descending = 2
+    PriceAscending = 1,
+    PriceDescending = 2,
+    NameAscending = 3,
+    NameDescending = 4
 }
