@@ -9,5 +9,4 @@ public class UpdateProductRequest
     public string PictureFileName { get; set; } = null!;
     public int CatalogMechanicId { get; set; }
     public int CatalogCategoryId { get; set; }
-    public int AvailableStock { get; set; }
 }

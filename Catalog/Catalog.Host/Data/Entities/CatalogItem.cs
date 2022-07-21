@@ -11,5 +11,4 @@ public class CatalogItem
     public CatalogMechanic CatalogMechanic { get; set; } = null!;
     public int CatalogCategoryId { get; set; }
     public CatalogCategory CatalogCategory { get; set; } = null!;
-    public int AvailableStock { get; set; }
 }

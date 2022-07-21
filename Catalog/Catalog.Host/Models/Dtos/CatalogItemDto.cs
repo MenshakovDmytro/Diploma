@@ -9,5 +9,4 @@ public class CatalogItemDto
     public string PictureUrl { get; set; } = null!;
     public CatalogMechanicDto CatalogMechanic { get; set; } = null!;
     public CatalogCategoryDto CatalogCategory { get; set; } = null!;
-    public int AvailableStock { get; set; }
 }

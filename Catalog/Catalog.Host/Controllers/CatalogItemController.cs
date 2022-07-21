@@ -27,7 +27,7 @@ public class CatalogItemController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateProductRequest request)
     {
-        var result = await _catalogItemService.AddAsync(request.Name, request.Description, request.Price, request.AvailableStock, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
+        var result = await _catalogItemService.AddAsync(request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
         return Ok(new AddItemResponse<int?>() { Id = result });
     }
 
@@ -43,7 +43,7 @@ public class CatalogItemController : ControllerBase
     [ProducesResponseType(typeof(UpdateItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Update(UpdateProductRequest request)
     {
-        var result = await _catalogItemService.UpdateAsync(request.Id, request.Name, request.Description, request.Price, request.AvailableStock, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
+        var result = await _catalogItemService.UpdateAsync(request.Id, request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
         return Ok(new UpdateItemResponse<int?>() { Id = result });
     }
 }

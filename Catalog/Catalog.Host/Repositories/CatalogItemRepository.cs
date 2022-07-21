@@ -14,7 +14,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         _dbContext = dbContextWrapper.DbContext;
     }
 
-    public async Task<int?> AddAsync(string name, string description, decimal price, int availableStock, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
+    public async Task<int?> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
         var item = await _dbContext.AddAsync(new CatalogItem
         {
@@ -42,7 +42,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         return result.Entity.Id;
     }
 
-    public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
+    public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
         var item = await _dbContext.CatalogItems
             .FirstOrDefaultAsync(f => f.Id == id);
@@ -55,7 +55,6 @@ public class CatalogItemRepository : ICatalogItemRepository
             item.Name = name;
             item.PictureFileName = pictureFileName;
             item.Price = price;
-            item.AvailableStock = availableStock;
 
             item = _dbContext.Update(item).Entity;
             await _dbContext.SaveChangesAsync();
@@ -82,14 +81,17 @@ public class CatalogItemRepository : ICatalogItemRepository
 
         switch ((SortType)sort)
         {
-            case SortType.Ascending:
+            case SortType.PriceAscending:
                 query = query.OrderBy(o => o.Price);
                 break;
-            case SortType.Descending:
+            case SortType.PriceDescending:
                 query = query.OrderByDescending(o => o.Price);
                 break;
+            case SortType.NameDescending:
+                query = query.OrderByDescending(o => o.Name);
+                break;
             default:
-                query = query.OrderBy(c => c.Name);
+                query = query.OrderBy(o => o.Name);
                 break;
         }
 
