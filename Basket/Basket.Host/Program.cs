@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen(options =>
                 TokenUrl = new Uri($"{authority}/connect/token"),
                 Scopes = new Dictionary<string, string>()
                 {
-                    { "mvc", "website" },
+                    { "mvc", "website" }
                 }
             }
         }
@@ -63,10 +63,6 @@ builder.Services.AddSingleton<ConnectionMultiplexer>(sp =>
 {
     var config = sp.GetRequiredService<IOptions<RedisConfig>>().Value;
     var redisConfigurationOptions = ConfigurationOptions.Parse(config.Host, true);
-   // redisConfigurationOptions.AsyncTimeout = 60000;
-   // redisConfigurationOptions.ConnectTimeout = 60000;
-   // redisConfigurationOptions.SyncTimeout = 60000;
-   // redisConfigurationOptions.AbortOnConnectFail = false;
 
     return ConnectionMultiplexer.Connect(redisConfigurationOptions);
 });
