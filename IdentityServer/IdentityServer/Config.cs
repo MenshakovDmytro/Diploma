@@ -32,6 +32,8 @@ namespace IdentityServer
                     {
                         new Scope("catalog.catalogbff"),
                         new Scope("catalog.catalogitem"),
+                        new Scope("catalog.catalogcategory"),
+                        new Scope("catalog.catalogmechanic")
                     },
                 }
             };
@@ -67,6 +69,32 @@ namespace IdentityServer
                 },
                 new Client
                 {
+                    ClientId = "basket",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                },
+                new Client
+                {
+                    ClientId = "marketing",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                },
+                new Client
+                {
                     ClientId = "catalogswaggerui",
                     ClientName = "Catalog Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
@@ -77,7 +105,7 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc", "catalog.catalogbff", "catalog.catalogitem"
+                        "mvc", "catalog.catalogbff", "catalog.catalogitem", "catalog.catalogcategory", "catalog.catalogmechanic"
                     }
                 },
                 new Client
@@ -95,6 +123,21 @@ namespace IdentityServer
                         "mvc"
                     }
                 },
+                new Client
+                {
+                    ClientId = "marketingswaggerui",
+                    ClientName = "Marketing Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{configuration["MarketingApi"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{configuration["MarketingApi"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "mvc"
+                    }
+                }
             };
         }
     }
