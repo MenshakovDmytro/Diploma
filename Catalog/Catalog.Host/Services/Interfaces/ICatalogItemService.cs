@@ -9,5 +9,5 @@ public interface ICatalogItemService
     Task<RemoveItemResponse<int?>> RemoveAsync(int id);
     Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName);
     Task<ItemsListResponse<CatalogItemDto>> GetItemsAsync();
-    Task<CatalogItemDto?> GetItemAsync(int id);
+    Task<GetItemResponse<CatalogItemDto>> GetItemAsync(int id);
 }
