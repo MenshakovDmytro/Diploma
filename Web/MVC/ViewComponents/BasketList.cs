@@ -14,20 +14,8 @@ namespace MVC.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(ApplicationUser user)
         {
-            var vm = new CustomerBasket();
-            try
-            {
-                vm = await GetItemsAsync(user);
-                return View(vm);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.BasketInoperativeMsg = $"Basket Service is inoperative, please try later on. ({ex.GetType().Name} - {ex.Message}))";
-            }
-
+            var vm = await _basketService.GetBasket(user);
             return View(vm);
         }
-
-        private Task<CustomerBasket> GetItemsAsync(ApplicationUser user) => _basketService.GetBasket(user);
     }
 }
