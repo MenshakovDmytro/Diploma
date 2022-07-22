@@ -45,7 +45,6 @@ public static class AuthorizationExtensions
                     policy.AuthenticationSchemes.Add(AuthScheme.Internal);
                     policy.Requirements.Add(new DenyAnonymousAuthorizationRequirement());
                     policy.Requirements.Add(new ScopeRequirement());
-                    policy.RequireClaim(JwtRegisteredClaimNames.Sub);
             });
         });
 
