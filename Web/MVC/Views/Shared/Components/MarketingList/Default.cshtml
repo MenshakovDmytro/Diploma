@@ -1,0 +1,50 @@
+﻿@using MVC.Services.Interfaces
+@model MVC.ViewModels.MarketingViewModels.MarketingViewModel
+@inject IIdentityParser<ApplicationUser> UserManager
+
+@{
+    var user = UserManager.Parse(User);
+    var marketingItem = @Model.MarketingItems.Find(f => f.UserId.Equals(user.Id));
+}
+<div class="container" style="height:250px;overflow:auto;">
+        @foreach (var item in Model.MarketingItems)
+         {
+            <div>
+                <h4>@item.Username</h4>
+                <p>@item.Comment</p>
+                <p> Raiting: @item.Rating/5</p>
+            </div>
+         }
+</div>
+
+@if(User.Identity.IsAuthenticated)
+{
+    @if(marketingItem is null)
+    {
+         <section class="container m-lg-0">
+         <textarea class="form-control" style="resize:none;height:100px;margin-top:25px;" placeholder="What is your review?" rows="4" name="comment"></textarea>
+         <input type="radio" name="rating" value="1" id="1"><label for="5"></label>
+         <input type="radio" name="rating" value="2" id="2"><label for="4"></label> 
+         <input type="radio" name="rating" value="3" id="3"><label for="3"></label>
+         <input type="radio" name="rating" value="4" id="4"><label for="2"></label>
+         <input type="radio" name="rating" value="5" id="5"><label for="1"></label>
+         <br>
+             <button asp-controller="Marketing" 
+                     asp-action="AddReview"
+                     asp-route-productId="@Model.ProductId"
+                     class="esh-catalog-button">
+                     Send
+             </button>
+         </section>
+    }
+    else
+    {
+        <button asp-controller="Marketing" 
+                asp-action="RemoveReview"
+                asp-route-productId="@Model.ProductId"
+                class="esh-catalog-button"
+                style="color:red;">
+                Remove review
+        </button>
+    }
+}
