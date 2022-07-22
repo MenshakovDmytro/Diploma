@@ -15,23 +15,10 @@ public class Basket : ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync(ApplicationUser user)
     {
-        var vm = new BasketComponentViewModel();
-        try
-        {
-            var itemsInBasket = await ItemsInBasketAsync(user);
-            vm.ItemsCount = itemsInBasket;
-            return View(vm);
-        }
-        catch
-        {
-            ViewBag.IsBasketInoperative = true;
-        }
+        var vm = new BasketViewModel();
+        var basket = await _basketService.GetBasket(user);
+        vm.ItemsCount = basket.Items.Count;
 
         return View(vm);
-    }
-    private async Task<int> ItemsInBasketAsync(ApplicationUser user)
-    {
-        var basket = await _basketService.GetBasket(user);
-        return basket.Items.Count;
     }
 }
