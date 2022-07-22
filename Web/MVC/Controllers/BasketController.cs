@@ -6,17 +6,24 @@ namespace MVC.Controllers;
 public class BasketController : Controller
 {
     private readonly IBasketService _basketService;
+    private readonly ILogger<AccountController> _logger;
     private readonly IIdentityParser<ApplicationUser> _appUserParser;
 
-    public BasketController(IBasketService basketService, IIdentityParser<ApplicationUser> appUserParser)
+    public BasketController(IBasketService basketService, IIdentityParser<ApplicationUser> appUserParser, ILogger<AccountController> logger)
     {
         _basketService = basketService;
         _appUserParser = appUserParser;
+        _logger = logger;
     }
 
     public async Task<IActionResult> Index()
     {
         var user = GetCurrentUser();
+        foreach (var item in User.Claims)
+        {
+            _logger.LogInformation($"{item.Type} - {item.Value}");
+        }
+
         var basket = await _basketService.GetBasket(user);
         if (basket == null)
         {
