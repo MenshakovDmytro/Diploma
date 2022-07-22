@@ -26,8 +26,8 @@ public class BasketService : IBasketService
         });
 
         return result == null ?
-             new CustomerBasket()
-             : result;
+            new CustomerBasket()
+            : result;
     }
 
     public async Task<AddItemResponse> AddToBasket(ApplicationUser user, BasketItem basketItem)
