@@ -2,6 +2,7 @@
 using MVC.Models.Enums;
 using MVC.Models.Requests;
 using MVC.Models.Response;
+using MVC.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
@@ -35,12 +36,12 @@ public class CatalogService : ICatalogService
         var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/Items",
            HttpMethod.Post, 
            new PaginatedItemsRequest<CatalogTypeFilter>()
-            {
+           {
                 PageIndex = page,
                 PageSize = take,
                 Filters = filters,
                 Sort = sort
-            });
+           });
 
         return result;
     }
@@ -89,9 +90,9 @@ public class CatalogService : ICatalogService
         return list;
     }
 
-    public async Task<CatalogItem> GetItem(int id)
+    public async Task<GetItemResponse<CatalogItem>> GetItem(int id)
     {
-        var result = await _httpClient.SendAsync<CatalogItem, GetItemRequest?>($"{_settings.Value.CatalogUrl}/GetItem",
+        var result = await _httpClient.SendAsync<GetItemResponse<CatalogItem>, GetItemRequest?>($"{_settings.Value.CatalogUrl}/GetItem",
             HttpMethod.Post,
             new GetItemRequest
             {
