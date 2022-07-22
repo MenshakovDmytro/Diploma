@@ -31,4 +31,12 @@ public class MarketingBffController : ControllerBase
         var result = await _marketingItemService.GetReviews(request.ProductId);
         return Ok(result);
     }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(RemoveReviewResponse<int?>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> RemoveReview(RemoveReviewRequest request)
+    {
+        var result = await _marketingItemService.RemoveReview(request.UserId);
+        return Ok(result);
+    }
 }
