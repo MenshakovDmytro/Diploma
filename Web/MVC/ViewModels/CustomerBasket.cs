@@ -2,10 +2,6 @@
 {
     public class CustomerBasket
     {
-        // Use property initializer syntax.
-        // While this is often more useful for read only 
-        // auto implemented properties, it can simplify logic
-        // for read/write properties.
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
 
         public decimal Total()
