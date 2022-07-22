@@ -27,11 +27,18 @@ public class MarketingItemService : BaseDataService<ApplicationDbContext>, IMark
     {
         return await ExecuteSafeAsync(async () =>
         {
-           var result = await _marketingItemRepository.AddAsync(productId, userId, username, comment, rating);
-           return new AddReviewResponse<int?>()
-           {
-               Id = result
-           };
+            var productReviews = await _marketingItemRepository.GetItemsAsync(productId);
+            var user = productReviews.Data.FirstOrDefault(f => f.UserId.Equals(userId));
+            if (user is not null)
+            {
+                return new AddReviewResponse<int?>();
+            }
+
+            var result = await _marketingItemRepository.AddAsync(productId, userId, username, comment, rating);
+            return new AddReviewResponse<int?>()
+            {
+                Id = result
+            };
         });
     }
 
@@ -42,8 +49,20 @@ public class MarketingItemService : BaseDataService<ApplicationDbContext>, IMark
             var result = await _marketingItemRepository.GetItemsAsync(productId);
             return new ItemsListResponse<MarketingItemDto>()
             {
-                Count = result.TotalCount,
-                Data = result.Data.Select(s => _mapper.Map<MarketingItem, MarketingItemDto>(s)).ToList()
+                Count = result.Count,
+                Data = result.Data.Select(s => _mapper.Map<MarketingItemDto>(s)).ToList()
+            };
+        });
+    }
+
+    public async Task<RemoveReviewResponse<int?>> RemoveReview(string userId)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _marketingItemRepository.RemoveByUserId(userId);
+            return new RemoveReviewResponse<int?>()
+            {
+               Id= result
             };
         });
     }
