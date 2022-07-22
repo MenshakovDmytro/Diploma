@@ -1,8 +1,6 @@
-﻿using Catalog.Host.Models.Dtos;
+﻿namespace Catalog.Host.Models.Response;
 
-namespace Catalog.Host.Models.Response;
-
-public class GetItemResponse
+public class GetItemResponse<T>
 {
-    public CatalogItemDto CatalogItem { get; set; } = null!;
+    public T Item { get; set; } = default(T) !;
 }
