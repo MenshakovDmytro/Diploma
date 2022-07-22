@@ -51,7 +51,6 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("mvc");
     });
 
-
 builder.Services.Configure<AppSettings>(configuration);
 
 builder.Services.AddHttpClient();
@@ -61,6 +60,8 @@ builder.Services.AddTransient<IHttpClientService, HttpClientService>();
 builder.Services.AddTransient<IBasketService, BasketService>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
+
+builder.Services.AddTransient<IMarketingService, MarketingService>();
 
 var app = builder.Build();
 
