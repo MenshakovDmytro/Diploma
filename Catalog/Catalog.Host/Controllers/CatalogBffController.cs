@@ -39,7 +39,7 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(CatalogItemDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GetItemResponse<CatalogItemDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetItem(GetItemRequest request)
     {
         var result = await _catalogItemService.GetItemAsync(request.Id);
