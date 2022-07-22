@@ -22,19 +22,40 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
         _mapper = mapper;
     }
 
-    public Task<int?> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
+    public async Task<AddItemResponse<int?>> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
-        return ExecuteSafeAsync(() => _catalogItemRepository.AddAsync(name, description, price, catalogCategoryId, catalogMechanicId, pictureFileName));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.AddAsync(name, description, price, catalogCategoryId, catalogMechanicId, pictureFileName);
+            return new AddItemResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
-    public Task<int?> RemoveAsync(int id)
+    public async Task<RemoveItemResponse<int?>> RemoveAsync(int id)
     {
-        return ExecuteSafeAsync(() => _catalogItemRepository.RemoveAsync(id));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.RemoveAsync(id);
+            return new RemoveItemResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
-    public Task<int?> UpdateAsync(int id, string name, string description, decimal price, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    public async Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name, string description, decimal price, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
-        return ExecuteSafeAsync(() => _catalogItemRepository.UpdateAsync(id, name, description, price, catalogBrandId, catalogTypeId, pictureFileName));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.UpdateAsync(id, name, description, price, catalogBrandId, catalogTypeId, pictureFileName);
+            return new UpdateCategoryResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
     public async Task<ItemsListResponse<CatalogItemDto>> GetItemsAsync()

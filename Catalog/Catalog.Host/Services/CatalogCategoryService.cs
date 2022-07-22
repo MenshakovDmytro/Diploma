@@ -22,19 +22,40 @@ public class CatalogCategoryService : BaseDataService<ApplicationDbContext>, ICa
         _mapper = mapper;
     }
 
-    public Task<int?> AddAsync(string name)
+    public async Task<AddCategoryResponse<int?>> AddAsync(string name)
     {
-        return ExecuteSafeAsync(() => _catalogCategoryRepository.AddAsync(name));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogCategoryRepository.AddAsync(name);
+            return new AddCategoryResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
-    public Task<int?> RemoveAsync(int id)
+    public async Task<RemoveCategoryResponse<int?>> RemoveAsync(int id)
     {
-        return ExecuteSafeAsync(() => _catalogCategoryRepository.RemoveAsync(id));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogCategoryRepository.RemoveAsync(id);
+            return new RemoveCategoryResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
-    public Task<int?> UpdateAsync(int id, string name)
+    public async Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name)
     {
-        return ExecuteSafeAsync(() => _catalogCategoryRepository.UpdateAsync(id, name));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogCategoryRepository.UpdateAsync(id, name);
+            return new UpdateCategoryResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
     public async Task<ItemsListResponse<CatalogCategoryDto>> GetCategoriesAsync()

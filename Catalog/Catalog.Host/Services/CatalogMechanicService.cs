@@ -22,19 +22,40 @@ public class CatalogMechanicService : BaseDataService<ApplicationDbContext>, ICa
         _mapper = mapper;
     }
 
-    public Task<int?> AddAsync(string name)
+    public async Task<AddMechanicResponse<int?>> AddAsync(string name)
     {
-        return ExecuteSafeAsync(() => _catalogMechanicRepository.AddAsync(name));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogMechanicRepository.AddAsync(name);
+            return new AddMechanicResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
-    public Task<int?> RemoveAsync(int id)
+    public async Task<RemoveMechanicResponse<int?>> RemoveAsync(int id)
     {
-        return ExecuteSafeAsync(() => _catalogMechanicRepository.RemoveAsync(id));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogMechanicRepository.RemoveAsync(id);
+            return new RemoveMechanicResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
-    public Task<int?> UpdateAsync(int id, string name)
+    public async Task<UpdateMechanicResponse<int?>> UpdateAsync(int id, string name)
     {
-        return ExecuteSafeAsync(() => _catalogMechanicRepository.UpdateAsync(id, name));
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogMechanicRepository.UpdateAsync(id, name);
+            return new UpdateMechanicResponse<int?>()
+            {
+                Id = result
+            };
+        });
     }
 
     public async Task<ItemsListResponse<CatalogMechanicDto>> GetMechanicsAsync()

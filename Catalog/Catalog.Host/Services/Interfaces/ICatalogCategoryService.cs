@@ -5,8 +5,8 @@ namespace Catalog.Host.Services.Interfaces;
 
 public interface ICatalogCategoryService
 {
-    Task<int?> AddAsync(string name);
-    Task<int?> RemoveAsync(int id);
-    Task<int?> UpdateAsync(int id, string name);
+    Task<AddCategoryResponse<int?>> AddAsync(string name);
+    Task<RemoveCategoryResponse<int?>> RemoveAsync(int id);
+    Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name);
     Task<ItemsListResponse<CatalogCategoryDto>> GetCategoriesAsync();
 }

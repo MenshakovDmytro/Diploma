@@ -28,7 +28,7 @@ public class CatalogMechanicController : ControllerBase
     public async Task<IActionResult> Add(CreateMechanicRequest request)
     {
         var result = await _catalogMechanicService.AddAsync(request.Name);
-        return Ok(new AddMechanicResponse<int?>() { Id = result });
+        return Ok(result);
     }
 
     [HttpPost]
@@ -36,7 +36,7 @@ public class CatalogMechanicController : ControllerBase
     public async Task<IActionResult> Remove(RemoveMechanicRequest request)
     {
         var result = await _catalogMechanicService.RemoveAsync(request.Id);
-        return Ok(new RemoveMechanicResponse<int?>() { Id = result });
+        return Ok(result);
     }
 
     [HttpPost]
@@ -44,6 +44,6 @@ public class CatalogMechanicController : ControllerBase
     public async Task<IActionResult> Update(UpdateMechanicRequest request)
     {
         var result = await _catalogMechanicService.UpdateAsync(request.Id, request.Name);
-        return Ok(new UpdateMechanicResponse<int?>() { Id = result });
+        return Ok(result);
     }
 }

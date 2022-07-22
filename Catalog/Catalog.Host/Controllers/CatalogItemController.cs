@@ -28,7 +28,7 @@ public class CatalogItemController : ControllerBase
     public async Task<IActionResult> Add(CreateProductRequest request)
     {
         var result = await _catalogItemService.AddAsync(request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
-        return Ok(new AddItemResponse<int?>() { Id = result });
+        return Ok(result);
     }
 
     [HttpPost]
@@ -36,7 +36,7 @@ public class CatalogItemController : ControllerBase
     public async Task<IActionResult> Remove(RemoveProductRequest request)
     {
         var result = await _catalogItemService.RemoveAsync(request.Id);
-        return Ok(new RemoveItemResponse<int?>() { Id = result });
+        return Ok(result);
     }
 
     [HttpPost]
@@ -44,6 +44,6 @@ public class CatalogItemController : ControllerBase
     public async Task<IActionResult> Update(UpdateProductRequest request)
     {
         var result = await _catalogItemService.UpdateAsync(request.Id, request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
-        return Ok(new UpdateItemResponse<int?>() { Id = result });
+        return Ok(result);
     }
 }
