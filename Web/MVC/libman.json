@@ -8,7 +8,7 @@
     },
     {
       "provider": "unpkg",
-      "library": "bootstrap@5.2.0",
+      "library": "bootstrap@4.3.1",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [
         "dist/css/bootstrap.css",
@@ -18,10 +18,6 @@
         "dist/js/bootstrap.js",
         "dist/js/bootstrap.min.js"
       ]
-    },
-    {
-      "library": "jquery-validation-unobtrusive@4.0.0",
-      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
     },
     {
       "library": "jquery-validate@1.19.5",
