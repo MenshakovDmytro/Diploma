@@ -17,6 +17,9 @@ public class CatalogItemEntityTypeConfiguration
             .IsRequired(true)
             .HasMaxLength(50);
 
+        builder.Property(ci => ci.Description)
+            .IsRequired(true);
+
         builder.Property(ci => ci.Price)
             .IsRequired(true);
 
