@@ -27,4 +27,16 @@ public class MarketingController : Controller
 
         return RedirectToAction("ProductPageInfo", "Catalog", new { id = productId });
     }
+
+    public async Task<IActionResult> RemoveReview(int productId)
+    {
+        var user = _appUserParser.Parse(HttpContext.User);
+        var result = await _marketingService.RemoveReview(user.Id);
+        if (result == null)
+        {
+            return View("Error");
+        }
+
+        return RedirectToAction("ProductPageInfo", "Catalog", new { id = productId });
+    }
 }
