@@ -1,5 +1,9 @@
 ﻿@model CatalogItem
 
+@{
+    ViewData["Title"] = "Item Page";
+}
+
 <form asp-controller="Basket"
       asp-action="AddToBasket"
       asp-route-id = "@Model.Id"
@@ -8,20 +12,25 @@
       asp-route-pictureUrl = "@Model.PictureUrl">
     <article class="esh-basket-titles row">
             <section class="esh-basket-title col-2"></section>
-            <section class="esh-basket-title col-3" style="text-align:center">Product</section>
-            <section class="esh-basket-title col-4" style="text-align:center">Description</section>
-            <section class="esh-basket-title col-3">Price</section>
+            <section class="esh-basket-title col-2" style="text-align:center">Product</section>
+            <section class="esh-basket-title col-3" style="text-align:center">Description</section>
+            <section class="esh-basket-title col-1">Price</section>
+            <section class="esh-basket-title col-4" style="text-align:center">Customer reviews</section>
      </article>
-      <article class="esh-basket-items  row" style="height: 250px;">
+      <article class="esh-basket-items  row" style="height: 400px;">
             <section class="esh-basket-item esh-basket-item--middle col-lg-2 hidden-lg-down">
                 <img class="esh-basket-image" src="@Model.PictureUrl" style="width: 200px; height: 200px;" />
             </section>
-            <section class="esh-basket-item esh-basket-item--middle col-3" style="text-align:center">@Model.Name</section>
-            <section class="esh-basket-item esh-basket-item--middle col-4">@Model.Description</section>
-            <section class="esh-basket-item esh-basket-item--middle col-3">$ @Model.Price.ToString("N2")</section>
+            <section class="esh-basket-item esh-basket-item--middle col-2" style="text-align:center">@Model.Name</section>
+            <section class="esh-basket-item esh-basket-item--middle col-3">@Model.Description</section>
+            <section class="esh-basket-item esh-basket-item--middle col-1">$ @Model.Price.ToString("N2")</section>
+            <section class="esh-basket-item esh-basket-item--middle col-4" style="width:250px;word-wrap:break-word;max-height:250px;">
+                @await Component.InvokeAsync("MarketingList", new { id = @Model.Id })
+            </section>
         </article>
 
-    <input class="esh-catalog-button @((!User.Identity.IsAuthenticated) ? "is-disabled" : "")" 
+    <input class="esh-catalog-button @((!User.Identity.IsAuthenticated) ? "is-disabled" : "")"
+           style="width: 1000px;"
            type="submit" 
            value="[ ADD TO BASKET ]" />
 </form>
