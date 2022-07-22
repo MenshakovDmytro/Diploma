@@ -36,6 +36,21 @@ services:
       - postgres
     ports:
       - 5000:5000
+  marketing.api:
+    container_name: lde.marketing.api
+    build:
+      context: .
+      dockerfile: Marketing/Marketing.Host/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:5004
+       - ConnectionString=server=www.boardgameswebsite.com;port=5434;database=marketing;uid=postgres;password=postgres;
+       - Authorization__Authority=http://www.boardgameswebsite.com:5002
+       - PathBase=http://www.boardgameswebsite.com:5004
+    depends_on:
+      - marketing
+    ports:
+      - 5004:5004
   web.mvc:
     container_name: lde.web.mvc
     build:
@@ -46,6 +61,7 @@ services:
       - ASPNETCORE_URLS=http://+:5001
       - CatalogUrl=http://www.boardgameswebsite.com:5000/api/v1/catalogbff
       - BasketUrl=http://www.boardgameswebsite.com:5003/api/v1/basketbff
+      - MarketingUrl=http://www.boardgameswebsite.com:5004/api/v1/marketingbff
       - Authorization__Authority=http://www.boardgameswebsite.com:5002
       - IdentityUrl=http://www.boardgameswebsite.com:5002
       - CallBackUrl=http://www.boardgameswebsite.com/
@@ -53,6 +69,7 @@ services:
     depends_on:
       - catalog.api
       - basket.api
+      - marketing.api
       - identityserver
     ports:
       - 5001:5001
@@ -67,6 +84,7 @@ services:
       - MvcUrl=http://www.boardgameswebsite.com:5001
       - CatalogApi=http://www.boardgameswebsite.com:5000
       - BasketApi=http://www.boardgameswebsite.com:5003
+      - MarketingApi=http://www.boardgameswebsite.com:5004
     ports:
       - 5002:5002
   nginx:
@@ -85,6 +103,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: postgres
     depends_on:
       - postgres
+      - marketing
     ports:
       - 8001:80 
   postgres:
@@ -94,6 +113,13 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5433:5432
+  marketing:
+    image: postgres
+    container_name: lde.marketing
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5434:5432
   redis:
     image: redis
     container_name: lde.redis
