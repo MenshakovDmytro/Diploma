@@ -1,5 +1,6 @@
 ﻿using Marketing.Host.Data;
 using Marketing.Host.Data.Entities;
+using Marketing.Host.Models.Responses;
 using Marketing.Host.Repositories.Interfaces;
 
 namespace Marketing.Host.Repositories;
@@ -29,19 +30,34 @@ public class MarketingItemRepository : IMarketingItemRepository
         return item.Entity.Id;
     }
 
-    public async Task<ItemsList<MarketingItem>> GetItemsAsync(int productId)
+    public async Task<ItemsListResponse<MarketingItem>> GetItemsAsync(int productId)
     {
         var items = await _dbContext.MarketingItems
             .Where(w => w.ProductId == productId)
             .ToListAsync();
 
-        return new ItemsList<MarketingItem>() { TotalCount = items.Count, Data = items };
+        return new ItemsListResponse<MarketingItem>()
+        {
+            Count = items.Count,
+            Data = items
+        };
     }
 
     public async Task<int?> RemoveAsync(int id)
     {
         var item = await _dbContext.MarketingItems
             .FirstOrDefaultAsync(f => f.Id == id);
+
+        var result = _dbContext.Remove(item!);
+        await _dbContext.SaveChangesAsync();
+
+        return result.Entity.Id;
+    }
+
+    public async Task<int?> RemoveByUserId(string userId)
+    {
+        var item = await _dbContext.MarketingItems
+            .FirstOrDefaultAsync(f => f.UserId.Equals(userId));
 
         var result = _dbContext.Remove(item!);
         await _dbContext.SaveChangesAsync();
