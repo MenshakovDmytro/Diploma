@@ -57,6 +57,6 @@ public class CatalogController : Controller
             return View("Error");
         }
 
-        return View(product);
+        return View(product.Item);
     }
 }
