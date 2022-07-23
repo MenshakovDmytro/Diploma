@@ -70,4 +70,16 @@ public class CatalogCategoryService : BaseDataService<ApplicationDbContext>, ICa
             };
         });
     }
+
+    public async Task<GetItemResponse<CatalogCategoryDto>> GetCategoryAsync(int id)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogCategoryRepository.GetCategoryAsync(id);
+            return new GetItemResponse<CatalogCategoryDto>()
+            {
+                Item = _mapper.Map<CatalogCategoryDto>(result)
+            };
+        });
+    }
 }
