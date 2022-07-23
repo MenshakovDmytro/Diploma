@@ -1,6 +1,6 @@
 ﻿namespace MVC.Models.Requests;
 
-public class GetItemRequest
+public class GetItemRequest<T>
 {
-    public int Id { get; set; }
+    public T Id { get; set; } = default(T)!;
 }
