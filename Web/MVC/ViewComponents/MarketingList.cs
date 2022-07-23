@@ -1,31 +1,27 @@
 ﻿using MVC.Services.Interfaces;
 using MVC.ViewModels.MarketingViewModels;
 
-namespace MVC.ViewComponents
+namespace MVC.ViewComponents;
+
+public class MarketingList : ViewComponent
 {
-    public class MarketingList : ViewComponent
+    private readonly IMarketingService _marketingService;
+
+    public MarketingList(IMarketingService marketingService)
     {
-        private readonly IMarketingService _marketingService;
+        _marketingService = marketingService;
+    }
 
-        public MarketingList(IMarketingService marketingService)
+    public async Task<IViewComponentResult> InvokeAsync(int id)
+    {
+        var vm = new MarketingViewModel
         {
-            _marketingService = marketingService;
-        }
+            ProductId = id
+        };
 
-        public async Task<IViewComponentResult> InvokeAsync(int id)
-        {
-            var vm = new MarketingViewModel
-            {
-                ProductId = id
-            };
+        var marketingItem = await _marketingService.GetReviews(id);
+        vm.MarketingItems.AddRange(marketingItem.Data);
 
-            var marketingItem = await _marketingService.GetReviews(id);
-            foreach (var item in marketingItem.Data)
-            {
-                vm.MarketingItems.Add(item);
-            }
-
-            return View(vm);
-        }
+        return View(vm);
     }
 }
