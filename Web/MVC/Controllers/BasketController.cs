@@ -19,11 +19,6 @@ public class BasketController : Controller
     public async Task<IActionResult> Index()
     {
         var user = GetCurrentUser();
-        foreach (var item in User.Claims)
-        {
-            _logger.LogInformation($"{item.Type} - {item.Value}");
-        }
-
         var basket = await _basketService.GetBasket(user);
         if (basket == null)
         {
