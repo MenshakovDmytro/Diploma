@@ -1,5 +1,4 @@
-﻿using MVC.Dtos;
-using MVC.Models.Enums;
+﻿using MVC.Models.Enums;
 using MVC.Models.Requests;
 using MVC.Models.Response;
 using MVC.Models.Responses;
@@ -92,9 +91,9 @@ public class CatalogService : ICatalogService
 
     public async Task<GetItemResponse<CatalogItem>> GetItem(int id)
     {
-        var result = await _httpClient.SendAsync<GetItemResponse<CatalogItem>, GetItemRequest?>($"{_settings.Value.CatalogUrl}/GetItem",
+        var result = await _httpClient.SendAsync<GetItemResponse<CatalogItem>, GetItemRequest<int>?>($"{_settings.Value.CatalogUrl}/GetItem",
             HttpMethod.Post,
-            new GetItemRequest
+            new GetItemRequest<int>
             {
                 Id = id
             });
