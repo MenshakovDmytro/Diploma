@@ -1,4 +1,3 @@
-using Catalog.Host;
 using Catalog.Host.Configurations;
 using Catalog.Host.Data;
 using Catalog.Host.Repositories;
@@ -41,10 +40,7 @@ builder.Services.AddSwaggerGen(options =>
                 Scopes = new Dictionary<string, string>()
                 {
                     { "mvc", "website" },
-                    { "catalog.catalogbff", "catalog.catalogbff" },
-                    { "catalog.catalogitem", "catalog.catalogitem" },
-                    { "catalog.catalogcategory", "catalog.catalogcategory" },
-                    { "catalog.catalogmechanic", "catalog.catalogmechanic" }
+                    { "catalog.catalogbff", "catalog.catalogbff" }
                 }
             }
         }
