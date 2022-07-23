@@ -1,10 +1,6 @@
-﻿using MVC.ViewModels;
+﻿namespace MVC.Models.Requests;
 
-namespace MVC.Models.Requests
+public class AddItemRequest<T>
 {
-    public class AddItemRequest
-    {
-        public string Id { get; set; }
-        public BasketItem BasketItem { get; set; }
-    }
+    public T Name { get; set; } = default(T)!;
 }
