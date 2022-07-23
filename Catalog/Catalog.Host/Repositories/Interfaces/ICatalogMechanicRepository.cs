@@ -9,4 +9,5 @@ public interface ICatalogMechanicRepository
     Task<int?> RemoveAsync(int id);
     Task<int?> UpdateAsync(int id, string name);
     Task<ItemsList<CatalogMechanic>> GetMechanicsAsync();
+    Task<CatalogMechanic?> GetMechanicAsync(int id);
 }
