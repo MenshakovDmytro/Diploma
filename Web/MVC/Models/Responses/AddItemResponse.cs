@@ -1,6 +1,6 @@
 ﻿namespace MVC.Models.Responses;
 
-public class AddItemResponse
+public class AddItemResponse<T>
 {
-    public bool Result { get; set; }
+    public T Id { get; set; } = default(T)!;
 }
