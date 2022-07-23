@@ -13,7 +13,7 @@ public class IdentityParser : IIdentityParser<ApplicationUser>
         {
             return new ApplicationUser
             {
-
+                Role = claims.Claims.FirstOrDefault(x => x.Type == "role")?.Value ?? "",
                 CardHolderName = claims.Claims.FirstOrDefault(x => x.Type == "card_holder")?.Value ?? "",
                 CardNumber = claims.Claims.FirstOrDefault(x => x.Type == "card_number")?.Value ?? "",
                 Expiration = claims.Claims.FirstOrDefault(x => x.Type == "card_expiration")?.Value ?? "",
