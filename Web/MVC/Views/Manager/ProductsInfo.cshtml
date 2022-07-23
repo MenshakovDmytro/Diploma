@@ -1,0 +1,57 @@
+﻿@model MVC.ViewModels.ManagerViewModels.CatalogItemListViewModel
+
+@{
+    ViewData["Title"] = "Catalog Items";
+}
+
+<form class="container">
+
+    @if (Model.CatalogItems.Count() > 0)
+    {
+        <article class="esh-basket-titles row">
+            <section class="esh-basket-title col-2"></section>
+            <section class="esh-basket-title col-2" style="text-align:center">Product</section>
+            <section class="esh-basket-title col-3" style="text-align:center">Description</section>
+            <section class="esh-basket-title col-2" style="text-align:center">Category</section>
+            <section class="esh-basket-title col-2" style="text-align:center">Mechanic</section>
+            <section class="esh-basket-title col-1">Price</section>
+        </article>
+        @foreach (var catalogItem in Model.CatalogItems)
+        {
+            <article class="esh-basket-items  row" style="height: 400px;">
+                <section class="esh-basket-item esh-basket-item--middle col-lg-2 hidden-lg-down">
+                    <img class="esh-basket-image" src="@catalogItem.PictureUrl" style="width: 200px; height: 200px;" />
+                </section>
+                <section class="esh-basket-item esh-basket-item--middle col-2" style="text-align:center">@catalogItem.Name</section>
+                <section class="esh-basket-item esh-basket-item--middle col-3">@catalogItem.Description</section>
+                <section class="esh-basket-item esh-basket-item--middle col-2" style="text-align:center">@catalogItem.CatalogCategory.Category</section>
+                <section class="esh-basket-item esh-basket-item--middle col-2" style="text-align:center">@catalogItem.CatalogMechanic.Mechanic</section>
+                <section class="esh-basket-item esh-basket-item--middle col-1">$ @catalogItem.Price.ToString("N2")</section>
+                <section class="esh-basket-item">
+                    <button asp-controller="Manager"
+                            asp-action="EditItemPage" 
+                            asp-route-id="@catalogItem.Id" 
+                            class="btn esh-basket-checkout"
+                            type="submit">[ Edit ]
+                    </button>
+                </section>
+                <section class="esh-basket-item">
+                    <button asp-controller="Manager"
+                            asp-action="RemoveItem"
+                            asp-route-id="@catalogItem.Id" 
+                            class="btn esh-basket-checkout" 
+                            type="submit">[ Remove ]
+                    </button>
+                </section>
+            </article>
+        }
+    }
+
+    <section class="esh-basket-item">
+        <button asp-controller="Manager"
+                asp-action="AddItem"
+                class="btn esh-basket-checkout" 
+                type="submit">[ Add Item ]
+        </button>
+    </section>
+</form>
