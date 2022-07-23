@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using IdentityModel;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -37,14 +38,22 @@ public static class AuthorizationExtensions
         {
             options.AddPolicy(AuthPolicy.AllowEndUserPolicy, policy =>
             {
-                    policy.AuthenticationSchemes.Add(AuthScheme.Site);
-                    policy.RequireClaim(JwtRegisteredClaimNames.Sub);
+                policy.AuthenticationSchemes.Add(AuthScheme.Site);
+                policy.RequireClaim(JwtRegisteredClaimNames.Sub);
             });
             options.AddPolicy(AuthPolicy.AllowClientPolicy, policy =>
             {
-                    policy.AuthenticationSchemes.Add(AuthScheme.Internal);
-                    policy.Requirements.Add(new DenyAnonymousAuthorizationRequirement());
-                    policy.Requirements.Add(new ScopeRequirement());
+                policy.AuthenticationSchemes.Add(AuthScheme.Internal);
+                policy.Requirements.Add(new DenyAnonymousAuthorizationRequirement());
+                policy.Requirements.Add(new ScopeRequirement());
+            });
+            options.AddPolicy(AuthPolicy.AllowManagerPolicy, policy =>
+            {
+                policy.AuthenticationSchemes.Add(AuthScheme.Site);
+                policy.Requirements.Add(new ScopeRequirement());
+                policy.RequireClaim(JwtRegisteredClaimNames.Sub);
+
+                // policy.RequireClaim(JwtClaimTypes.Role, "manager");
             });
         });
 
