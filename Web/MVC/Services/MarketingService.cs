@@ -29,9 +29,9 @@ public class MarketingService : IMarketingService
         return result;
     }
 
-    public async Task<AddReviewResponse<int?>> AddReview(int productId, ApplicationUser user, string comment, int rating)
+    public async Task<AddItemResponse<int?>> AddReview(int productId, ApplicationUser user, string comment, int rating)
     {
-        var result = await _httpClient.SendAsync<AddReviewResponse<int?>, AddReviewRequest>($"{_settings.Value.MarketingUrl}/AddReview",
+        var result = await _httpClient.SendAsync<AddItemResponse<int?>, AddReviewRequest>($"{_settings.Value.MarketingUrl}/AddReview",
         HttpMethod.Post,
         new AddReviewRequest
         {
