@@ -2,5 +2,5 @@
 
 public class AddItemRequest<T>
 {
-    public T Name { get; set; } = default(T)!;
+    public T Name { get; set; } = default(T) !;
 }

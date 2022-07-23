@@ -2,5 +2,5 @@
 
 public class RemoveReviewResponse<T>
 {
-    public T Id { get; set; } = default(T)!;
+    public T Id { get; set; } = default(T) !;
 }

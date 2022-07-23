@@ -37,7 +37,7 @@ public class RedisCacheRepository : ICacheRepository
 
         return basket.HasValue ?
             _jsonSerializer.Deserialize<CustomerBasket>(basket)
-            : default(CustomerBasket)!;
+            : default(CustomerBasket) !;
     }
 
     public async Task<bool> AddOrUpdateAsync(string customerId, CustomerBasket customerBasket)

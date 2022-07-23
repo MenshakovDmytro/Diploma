@@ -50,8 +50,7 @@ public class CatalogService : ICatalogService
         var result = await _httpClient.SendAsync<ItemsListResponse<CatalogCategory>, object?>(
             $"{_settings.Value.CatalogUrl}/GetCategories",
             HttpMethod.Post,
-            null
-            );
+            null);
 
         var list = new List<SelectListItem>();
         list.Add(new SelectListItem() { Text = "All" });
@@ -72,8 +71,7 @@ public class CatalogService : ICatalogService
         var result = await _httpClient.SendAsync<ItemsListResponse<CatalogMechanic>, object?>(
             $"{_settings.Value.CatalogUrl}/GetMechanics",
             HttpMethod.Post,
-            null
-            );
+            null);
 
         var list = new List<SelectListItem>();
         list.Add(new SelectListItem() { Text = "All" });

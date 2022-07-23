@@ -26,7 +26,7 @@ public class BasketService : IBasketService
     {
         var result = await _cacheRepository.GetAsync(id);
         var basket = _mapper.Map<CustomerBasketDto>(result);
-         _logger.LogInformation($"GetBasket in service returned {basket}");
+        _logger.LogInformation($"GetBasket in service returned {basket}");
 
         return basket;
     }
