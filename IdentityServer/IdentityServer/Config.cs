@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Models;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using IdentityModel;
 
 namespace IdentityServer
 {
@@ -11,7 +12,8 @@ namespace IdentityServer
             return new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResource("role", new[] { JwtClaimTypes.Role })
             };
         }
 
@@ -30,10 +32,24 @@ namespace IdentityServer
                 {
                     Scopes = new List<Scope>
                     {
-                        new Scope("catalog.catalogbff"),
+                        new Scope("catalog"),
                         new Scope("catalog.catalogitem"),
-                        new Scope("catalog.catalogcategory"),
-                        new Scope("catalog.catalogmechanic")
+                        new Scope("catalog.catalogmechanic"),
+                        new Scope("catalog.catalogcategory")
+                    },
+                },
+                new ApiResource("basket")
+                {
+                    Scopes = new List<Scope>
+                    {
+                        new Scope("basket")
+                    },
+                },
+                new ApiResource("marketing")
+                {
+                    Scopes = new List<Scope>
+                    {
+                        new Scope("marketing")
                     },
                 }
             };
@@ -50,9 +66,9 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     RedirectUris = { $"{configuration["MvcUrl"]}/signin-oidc"},
-                    AllowedScopes = {"openid", "profile", "mvc"},
+                    AllowedScopes = {"openid", "profile", "role", "mvc", "catalog", "basket", "marketing"},
                     RequirePkce = true,
-                    RequireConsent = false
+                    RequireConsent = false,
                 },
                 new Client
                 {
@@ -105,7 +121,10 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc", "catalog.catalogbff", "catalog.catalogitem", "catalog.catalogcategory", "catalog.catalogmechanic"
+                        "mvc",
+                        "catalog.catalogitem",
+                        "catalog.catalogmechanic",
+                        "catalog.catalogcategory"
                     }
                 },
                 new Client
@@ -120,7 +139,8 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc"
+                        "mvc",
+                        "basket"
                     }
                 },
                 new Client
@@ -135,7 +155,8 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc"
+                        "mvc",
+                        "marketing"
                     }
                 }
             };
