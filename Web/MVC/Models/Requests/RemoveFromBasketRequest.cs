@@ -1,6 +1,4 @@
-﻿using MVC.ViewModels;
-
-namespace MVC.Models.Requests;
+﻿namespace MVC.Models.Requests;
 
 public class RemoveFromBasketRequest
 {
