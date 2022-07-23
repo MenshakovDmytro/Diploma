@@ -3,6 +3,7 @@ namespace MVC.ViewModels;
 // Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser
 {
+    public string Role { get; set; }
     public string CardNumber { get; set; }
     public string SecurityNumber { get; set; }
     public string Expiration { get; set; }
