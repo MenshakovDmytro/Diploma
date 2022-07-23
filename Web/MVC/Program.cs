@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using IdentityModel;
 using Infrastructure.Configuration;
 using Infrastructure.Extensions;
 using Infrastructure.Identity;
@@ -49,17 +50,21 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("openid");
         options.Scope.Add("profile");
         options.Scope.Add("mvc");
+        options.Scope.Add("role");
+        options.Scope.Add("basket");
+        options.Scope.Add("marketing");
+        options.ClaimActions.MapUniqueJsonKey(JwtClaimTypes.Role, "role");
     });
 
 builder.Services.Configure<AppSettings>(configuration);
 
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-//builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IHttpClientService, HttpClientService>();
 builder.Services.AddTransient<IBasketService, BasketService>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IMarketingService, MarketingService>();
+builder.Services.AddTransient<IManagerService, ManagerService>();
 builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
 
 
