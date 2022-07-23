@@ -1,3 +1,4 @@
+@using IdentityModel
 @using MVC.Services.Interfaces
 
 @inject IIdentityParser<ApplicationUser> UserManager
@@ -14,7 +15,28 @@
                 </section>
 
                 <section class="esh-identity-drop">
-                    
+                    @if(User.Claims.FirstOrDefault(f => f.Type == JwtClaimTypes.Role).Value.Equals("manager"))
+                    {
+                        <div>
+                            <a asp-controller="Manager"
+                               asp-action="ProductsInfo">
+                                Items
+                            </a>
+                        </div>
+                        <div>
+                            <a asp-controller="Manager"
+                                   asp-action="">
+                                Categories
+                            </a>
+                        </div>
+                        <div>
+                            <a asp-controller="Manager"
+                               asp-action="">
+                                Mechanics
+                            </a>
+                        </div>
+                    }
+
                     <a class="esh-identity-item"
                        href="javascript:document.getElementById('logoutForm').submit()">
 
@@ -28,6 +50,12 @@
 
     <section class="col-lg-1 col-xs-12">
         @await Component.InvokeAsync("Basket", new { user = UserManager.Parse(User) })
+
+        @if(User.Claims.FirstOrDefault(f => f.Type == JwtClaimTypes.Role).Value.Equals("manager"))
+        {
+            <img src="~/images/manager.png" />
+        }
+
     </section>
 }
 else
