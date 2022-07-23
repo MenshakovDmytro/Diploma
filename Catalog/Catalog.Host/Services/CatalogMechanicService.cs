@@ -70,4 +70,16 @@ public class CatalogMechanicService : BaseDataService<ApplicationDbContext>, ICa
             };
         });
     }
+
+    public async Task<GetItemResponse<CatalogMechanicDto>> GetMechanicAsync(int id)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogMechanicRepository.GetMechanicAsync(id);
+            return new GetItemResponse<CatalogMechanicDto>()
+            {
+                Item = _mapper.Map<CatalogMechanicDto>(result)
+            };
+        });
+    }
 }
