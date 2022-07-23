@@ -9,4 +9,5 @@ public interface ICatalogCategoryRepository
     Task<int?> RemoveAsync(int id);
     Task<int?> UpdateAsync(int id, string name);
     Task<ItemsList<CatalogCategory>> GetCategoriesAsync();
+    Task<CatalogCategory?> GetCategoryAsync(int id);
 }
