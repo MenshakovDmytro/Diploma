@@ -3,24 +3,36 @@ using Infrastructure.Identity;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Services.Interfaces;
+using Catalog.Host.Models.Dtos;
 
 namespace Catalog.Host.Controllers;
 
 [ApiController]
 [Authorize(Policy = AuthPolicy.AllowClientPolicy)]
-[Scope("catalog.catalogmechanic")]
 [Route(ComponentDefaults.DefaultRoute)]
 public class CatalogMechanicController : ControllerBase
 {
-    private readonly ILogger<CatalogMechanicController> _logger;
     private readonly ICatalogMechanicService _catalogMechanicService;
 
-    public CatalogMechanicController(
-        ILogger<CatalogMechanicController> logger,
-        ICatalogMechanicService catalogMechanicService)
+    public CatalogMechanicController(ICatalogMechanicService catalogMechanicService)
     {
-        _logger = logger;
         _catalogMechanicService = catalogMechanicService;
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(ItemsListResponse<CatalogMechanicDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetMechanics()
+    {
+        var result = await _catalogMechanicService.GetMechanicsAsync();
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(GetItemResponse<CatalogMechanicDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetMechanic(GetItemRequest request)
+    {
+        var result = await _catalogMechanicService.GetMechanicAsync(request.Id);
+        return Ok(result);
     }
 
     [HttpPost]
