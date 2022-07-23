@@ -10,6 +10,7 @@ namespace Basket.Host.Controllers;
 [ApiController]
 [Authorize(Policy = AuthPolicy.AllowEndUserPolicy)]
 [Route(ComponentDefaults.DefaultRoute)]
+
 public class BasketBffController : ControllerBase
 {
     private readonly ILogger<BasketBffController> _logger;
