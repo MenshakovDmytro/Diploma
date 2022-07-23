@@ -10,7 +10,9 @@ public class BasketService : IBasketService
     private readonly IOptions<AppSettings> _settings;
     private readonly IHttpClientService _httpClient;
 
-    public BasketService(IHttpClientService httpClient, IOptions<AppSettings> settings)
+    public BasketService(
+        IHttpClientService httpClient,
+        IOptions<AppSettings> settings)
     {
         _httpClient = httpClient;
         _settings = settings;
@@ -30,11 +32,11 @@ public class BasketService : IBasketService
             : result;
     }
 
-    public async Task<AddItemResponse> AddToBasket(ApplicationUser user, BasketItem basketItem)
+    public async Task<AddItemResponse<bool>> AddToBasket(ApplicationUser user, BasketItem basketItem)
     {
-        var result = await _httpClient.SendAsync<AddItemResponse, AddItemRequest>($"{_settings.Value.BasketUrl}/AddToBasket",
+        var result = await _httpClient.SendAsync<AddItemResponse<bool>, AddBasketItemRequest>($"{_settings.Value.BasketUrl}/AddToBasket",
         HttpMethod.Post,
-        new AddItemRequest()
+        new AddBasketItemRequest()
         {
             Id = user.Id,
             BasketItem = basketItem
