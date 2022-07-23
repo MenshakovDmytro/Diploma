@@ -3,24 +3,36 @@ using Infrastructure.Identity;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Services.Interfaces;
+using Catalog.Host.Models.Dtos;
 
 namespace Catalog.Host.Controllers;
 
 [ApiController]
 [Authorize(Policy = AuthPolicy.AllowClientPolicy)]
-[Scope("catalog.catalogcategory")]
 [Route(ComponentDefaults.DefaultRoute)]
 public class CatalogCategoryController : ControllerBase
 {
-    private readonly ILogger<CatalogCategoryController> _logger;
     private readonly ICatalogCategoryService _catalogCategoryService;
 
-    public CatalogCategoryController(
-        ILogger<CatalogCategoryController> logger,
-        ICatalogCategoryService catalogCategoryService)
+    public CatalogCategoryController(ICatalogCategoryService catalogCategoryService)
     {
-        _logger = logger;
         _catalogCategoryService = catalogCategoryService;
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(ItemsListResponse<CatalogCategoryDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetCategories()
+    {
+        var result = await _catalogCategoryService.GetCategoriesAsync();
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(GetItemResponse<CatalogCategoryDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetCategory(GetItemRequest request)
+    {
+        var result = await _catalogCategoryService.GetCategoryAsync(request.Id);
+        return Ok(result);
     }
 
     [HttpPost]
