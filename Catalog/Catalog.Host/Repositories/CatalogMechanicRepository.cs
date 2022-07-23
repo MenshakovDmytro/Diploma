@@ -1,5 +1,6 @@
 ﻿using Catalog.Host.Data;
 using Catalog.Host.Data.Entities;
+using Catalog.Host.Models.Response;
 using Catalog.Host.Repositories.Interfaces;
 
 namespace Catalog.Host.Repositories;
@@ -7,14 +8,10 @@ namespace Catalog.Host.Repositories;
 public class CatalogMechanicRepository : ICatalogMechanicRepository
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly ILogger<CatalogCategoryRepository> _logger;
 
-    public CatalogMechanicRepository(
-        IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
-        ILogger<CatalogCategoryRepository> logger)
+    public CatalogMechanicRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
     {
         _dbContext = dbContextWrapper.DbContext;
-        _logger = logger;
     }
 
     public async Task<int?> AddAsync(string name)
@@ -61,6 +58,18 @@ public class CatalogMechanicRepository : ICatalogMechanicRepository
         var types = await _dbContext.CatalogMechanics
             .ToListAsync();
 
-        return new ItemsList<CatalogMechanic>() { TotalCount = types.Count, Data = types };
+        return new ItemsList<CatalogMechanic>()
+        {
+            TotalCount = types.Count,
+            Data = types
+        };
+    }
+
+    public async Task<CatalogMechanic?> GetMechanicAsync(int id)
+    {
+        var type = await _dbContext.CatalogMechanics
+            .FirstOrDefaultAsync(f => f.Id == id);
+
+        return type;
     }
 }
