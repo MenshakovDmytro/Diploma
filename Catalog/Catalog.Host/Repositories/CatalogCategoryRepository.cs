@@ -1,5 +1,6 @@
 ﻿using Catalog.Host.Data;
 using Catalog.Host.Data.Entities;
+using Catalog.Host.Models.Response;
 using Catalog.Host.Repositories.Interfaces;
 
 namespace Catalog.Host.Repositories;
@@ -7,14 +8,10 @@ namespace Catalog.Host.Repositories;
 public class CatalogCategoryRepository : ICatalogCategoryRepository
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly ILogger<CatalogCategoryRepository> _logger;
 
-    public CatalogCategoryRepository(
-        IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
-        ILogger<CatalogCategoryRepository> logger)
+    public CatalogCategoryRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
     {
         _dbContext = dbContextWrapper.DbContext;
-        _logger = logger;
     }
 
     public async Task<int?> AddAsync(string name)
@@ -61,6 +58,18 @@ public class CatalogCategoryRepository : ICatalogCategoryRepository
         var categories = await _dbContext.CatalogCategories
             .ToListAsync();
 
-        return new ItemsList<CatalogCategory>() { TotalCount = categories.Count, Data = categories };
+        return new ItemsList<CatalogCategory>()
+        {
+            TotalCount = categories.Count,
+            Data = categories
+        };
+    }
+
+    public async Task<CatalogCategory?> GetCategoryAsync(int id)
+    {
+        var category = await _dbContext.CatalogCategories
+            .FirstOrDefaultAsync(f => f.Id == id);
+
+        return category;
     }
 }
