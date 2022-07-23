@@ -14,7 +14,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         _dbContext = dbContextWrapper.DbContext;
     }
 
-    public async Task<int?> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
+    public async Task<int?> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
     {
         var item = await _dbContext.AddAsync(new CatalogItem
         {
@@ -22,7 +22,6 @@ public class CatalogItemRepository : ICatalogItemRepository
             CatalogMechanicId = catalogMechanicId,
             Description = description,
             Name = name,
-            PictureFileName = pictureFileName,
             Price = price
         });
 
@@ -42,7 +41,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         return result.Entity.Id;
     }
 
-    public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
+    public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
     {
         var item = await _dbContext.CatalogItems
             .FirstOrDefaultAsync(f => f.Id == id);
@@ -53,7 +52,6 @@ public class CatalogItemRepository : ICatalogItemRepository
             item.CatalogMechanicId = catalogMechanicId;
             item.Description = description;
             item.Name = name;
-            item.PictureFileName = pictureFileName;
             item.Price = price;
 
             item = _dbContext.Update(item).Entity;
@@ -102,15 +100,25 @@ public class CatalogItemRepository : ICatalogItemRepository
            .Take(pageSize)
            .ToListAsync();
 
-        return new PaginatedItems<CatalogItem>() { TotalCount = totalItems, Data = itemsOnPage };
+        return new PaginatedItems<CatalogItem>()
+        {
+            TotalCount = totalItems,
+            Data = itemsOnPage
+        };
     }
 
     public async Task<ItemsList<CatalogItem>> GetItemsAsync()
     {
         var items = await _dbContext.CatalogItems
+            .Include(i => i.CatalogCategory)
+            .Include(i => i.CatalogMechanic)
             .ToListAsync();
 
-        return new ItemsList<CatalogItem>() { TotalCount = items.Count, Data = items };
+        return new ItemsList<CatalogItem>()
+        {
+            TotalCount = items.Count,
+            Data = items
+        };
     }
 
     public async Task<CatalogItem?> GetItemAsync(int id)
