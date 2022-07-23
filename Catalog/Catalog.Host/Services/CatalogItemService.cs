@@ -22,11 +22,11 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
         _mapper = mapper;
     }
 
-    public async Task<AddItemResponse<int?>> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
+    public async Task<AddItemResponse<int?>> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
     {
         return await ExecuteSafeAsync(async () =>
         {
-            var result = await _catalogItemRepository.AddAsync(name, description, price, catalogCategoryId, catalogMechanicId, pictureFileName);
+            var result = await _catalogItemRepository.AddAsync(name, description, price, catalogCategoryId, catalogMechanicId);
             return new AddItemResponse<int?>()
             {
                 Id = result
@@ -46,11 +46,11 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
         });
     }
 
-    public async Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name, string description, decimal price, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    public async Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
     {
         return await ExecuteSafeAsync(async () =>
         {
-            var result = await _catalogItemRepository.UpdateAsync(id, name, description, price, catalogBrandId, catalogTypeId, pictureFileName);
+            var result = await _catalogItemRepository.UpdateAsync(id, name, description, price, catalogCategoryId, catalogMechanicId);
             return new UpdateCategoryResponse<int?>()
             {
                 Id = result
