@@ -9,4 +9,5 @@ public interface ICatalogMechanicService
     Task<RemoveMechanicResponse<int?>> RemoveAsync(int id);
     Task<UpdateMechanicResponse<int?>> UpdateAsync(int id, string name);
     Task<ItemsListResponse<CatalogMechanicDto>> GetMechanicsAsync();
+    Task<GetItemResponse<CatalogMechanicDto>> GetMechanicAsync(int id);
 }
