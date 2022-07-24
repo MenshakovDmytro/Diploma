@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Add Mechanic";
+}
+
+<form asp-controller="Manager"
+      asp-action="AddMechanic">
+     <article>
+         <table>
+             <tr>
+                 <th>
+                     Mechanic:
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="Mechanic">
+                 </td>
+             </tr>
+         </table>
+     </article>
+     <button class="btn esh-basket-checkout" 
+             type="submit">[ Accept ]
+     </button>
+</form>
