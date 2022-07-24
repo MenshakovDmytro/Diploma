@@ -1,10 +1,10 @@
-﻿using MVC.Models.Requests;
+﻿namespace MVC.Services;
+
+using MVC.Models.Requests;
 using MVC.Models.Response;
 using MVC.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
-
-namespace MVC.Services;
 
 public class ManagerService : IManagerService
 {
@@ -42,9 +42,9 @@ public class ManagerService : IManagerService
         return result;
     }
 
-    public async Task<CatalogItem?> AddItem(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
+    public async Task<AddItemResponse<int?>> AddItem(string name, string description, decimal price, string pictureFileName, int categoryId, int mechanicId)
     {
-        var result = await _httpClient.SendAsync<CatalogItem?, AddCatalogItemRequest>(
+        var result = await _httpClient.SendAsync<AddItemResponse<int?>, AddCatalogItemRequest>(
             $"{_settings.Value.CatalogItemUrl}/Add",
             HttpMethod.Post,
             new AddCatalogItemRequest()
@@ -52,16 +52,17 @@ public class ManagerService : IManagerService
                 Name = name,
                 Description = description,
                 Price = price,
-                CatalogCategoryId = catalogCategoryId,
-                CatalogMechanicId = catalogMechanicId,
+                PictureFileName = pictureFileName,
+                CatalogCategoryId = categoryId,
+                CatalogMechanicId = mechanicId,
             });
 
         return result;
     }
 
-    public async Task<CatalogItem?> RemoveItem(int id)
+    public async Task<RemoveItemResponse<int?>> RemoveItem(int id)
     {
-        var result = await _httpClient.SendAsync<CatalogItem?, RemoveItemRequest<int>>(
+        var result = await _httpClient.SendAsync<RemoveItemResponse<int?>, RemoveItemRequest<int>>(
             $"{_settings.Value.CatalogItemUrl}/Remove",
             HttpMethod.Post,
             new RemoveItemRequest<int>()
@@ -72,9 +73,9 @@ public class ManagerService : IManagerService
         return result;
     }
 
-    public async Task<CatalogItem?> UpdateItem(int id, string name, string description, decimal price, int categoryId, int catalogMechanicId)
+    public async Task<UpdateItemResponse<int?>> UpdateItem(int id, string name, string description, decimal price, string pictureFileName, int categoryId, int mechanicId)
     {
-        var result = await _httpClient.SendAsync<CatalogItem?, UpdateCatalogItemRequest>(
+        var result = await _httpClient.SendAsync<UpdateItemResponse<int?>, UpdateCatalogItemRequest>(
             $"{_settings.Value.CatalogItemUrl}/Update",
             HttpMethod.Post,
             new UpdateCatalogItemRequest()
@@ -83,20 +84,146 @@ public class ManagerService : IManagerService
                 Name = name,
                 Description = description,
                 Price = price,
+                PictureFileName = pictureFileName,
                 CatalogCategoryId = categoryId,
-                CatalogMechanicId = catalogMechanicId,
+                CatalogMechanicId = mechanicId,
             });
 
         return result;
     }
 
-    public async Task<IEnumerable<SelectListItem>> GetCategoriesSelectedList()
+    public async Task<ItemsListResponse<CatalogCategory>> GetCategories()
     {
         var result = await _httpClient.SendAsync<ItemsListResponse<CatalogCategory>, object?>(
             $"{_settings.Value.CatalogCategoryUrl}/GetCategories",
             HttpMethod.Post,
-            null
-            );
+            null);
+
+        return result;
+    }
+
+    public async Task<GetItemResponse<CatalogCategory>> GetCategory(int id)
+    {
+        var result = await _httpClient.SendAsync<GetItemResponse<CatalogCategory>, GetItemRequest<int>>(
+            $"{_settings.Value.CatalogCategoryUrl}/GetCategory",
+            HttpMethod.Post,
+            new GetItemRequest<int>
+            {
+                Id = id
+            });
+
+        return result;
+    }
+
+    public async Task<GetItemResponse<int?>> AddCategory(string name)
+    {
+        var result = await _httpClient.SendAsync<GetItemResponse<int?>, AddItemRequest<string>>(
+            $"{_settings.Value.CatalogCategoryUrl}/Add",
+            HttpMethod.Post,
+            new AddItemRequest<string>()
+            {
+                Name = name
+            });
+
+        return result;
+    }
+
+    public async Task<RemoveItemResponse<int?>> RemoveCategory(int id)
+    {
+        var result = await _httpClient.SendAsync<RemoveItemResponse<int?>, RemoveItemRequest<int>>(
+            $"{_settings.Value.CatalogCategoryUrl}/Remove",
+            HttpMethod.Post,
+            new RemoveItemRequest<int>()
+            {
+                Id = id
+            });
+
+        return result;
+    }
+
+    public async Task<UpdateItemResponse<int?>> UpdateCategory(int id, string name)
+    {
+        var result = await _httpClient.SendAsync<UpdateItemResponse<int?>, UpdateItemRequest<string>>(
+            $"{_settings.Value.CatalogCategoryUrl}/Update",
+            HttpMethod.Post,
+            new UpdateItemRequest<string>()
+            {
+                Id = id,
+                Name = name
+            });
+
+        return result;
+    }
+
+    public async Task<ItemsListResponse<CatalogMechanic>> GetMechanics()
+    {
+        var result = await _httpClient.SendAsync<ItemsListResponse<CatalogMechanic>, object?>(
+            $"{_settings.Value.CatalogMechanicUrl}/GetMechanics",
+            HttpMethod.Post,
+            null);
+
+        return result;
+    }
+
+    public async Task<GetItemResponse<CatalogMechanic>> GetMechanic(int id)
+    {
+        var result = await _httpClient.SendAsync<GetItemResponse<CatalogMechanic>, GetItemRequest<int>>(
+            $"{_settings.Value.CatalogMechanicUrl}/GetMechanic",
+            HttpMethod.Post,
+            new GetItemRequest<int>
+            {
+                Id = id
+            });
+
+        return result;
+    }
+
+    public async Task<GetItemResponse<int?>> AddMechanic(string name)
+    {
+        var result = await _httpClient.SendAsync<GetItemResponse<int?>, AddItemRequest<string>>(
+            $"{_settings.Value.CatalogMechanicUrl}/Add",
+            HttpMethod.Post,
+            new AddItemRequest<string>()
+            {
+                Name = name
+            });
+
+        return result;
+    }
+
+    public async Task<RemoveItemResponse<int?>> RemoveMechanic(int id)
+    {
+        var result = await _httpClient.SendAsync<RemoveItemResponse<int?>, RemoveItemRequest<int>>(
+            $"{_settings.Value.CatalogMechanicUrl}/Remove",
+            HttpMethod.Post,
+            new RemoveItemRequest<int>()
+            {
+                Id = id
+            });
+
+        return result;
+    }
+
+    public async Task<UpdateItemResponse<int?>> UpdateMechanic(int id, string name)
+    {
+        var result = await _httpClient.SendAsync<UpdateItemResponse<int?>, UpdateItemRequest<string>>(
+            $"{_settings.Value.CatalogMechanicUrl}/Update",
+            HttpMethod.Post,
+            new UpdateItemRequest<string>()
+            {
+                Id = id,
+                Name = name
+            });
+
+        return result;
+    }
+
+    public async Task<IEnumerable<SelectListItem>> GeеSelectedListCategories()
+    {
+        var result = await _httpClient.SendAsync<ItemsListResponse<CatalogCategory>, object?>(
+            $"{_settings.Value.CatalogCategoryUrl}/GetCategories",
+            HttpMethod.Post,
+            null);
 
         var list = new List<SelectListItem>();
         foreach (var item in result.Data)
@@ -111,13 +238,12 @@ public class ManagerService : IManagerService
         return list;
     }
 
-    public async Task<IEnumerable<SelectListItem>> GetMechanicsSelectedList()
+    public async Task<IEnumerable<SelectListItem>> GetSelectedListMechanics()
     {
         var result = await _httpClient.SendAsync<ItemsListResponse<CatalogMechanic>, object?>(
             $"{_settings.Value.CatalogMechanicUrl}/GetMechanics",
             HttpMethod.Post,
-            null
-            );
+            null);
 
         var list = new List<SelectListItem>();
         foreach (var item in result.Data)
