@@ -1,12 +1,6 @@
-using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
-using Infrastructure.Configuration;
 using Infrastructure.Extensions;
-using Infrastructure.Identity;
-using Infrastructure.Services;
-using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.IdentityModel.Tokens;
 using MVC.Services;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
@@ -66,7 +60,6 @@ builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IMarketingService, MarketingService>();
 builder.Services.AddTransient<IManagerService, ManagerService>();
 builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
-
 
 var app = builder.Build();
 
