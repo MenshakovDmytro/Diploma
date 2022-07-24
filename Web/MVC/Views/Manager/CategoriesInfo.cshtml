@@ -1,0 +1,54 @@
+﻿@model MVC.ViewModels.ManagerViewModels.CatalogCategoriesListViewModel
+
+@{
+    ViewData["Title"] = "Categories Info";
+}
+
+<form class="container">
+
+    @if (Model.CatalogCategories.Count() > 0)
+    {
+        <table style="width:500px;table-layout:fixed;">
+            <tr>
+                <td>
+                </td>
+                <td>
+                    Category
+                </td>
+            </tr>
+            @foreach (var catalogCategory in Model.CatalogCategories)
+            {
+                    <tr>
+                        <td>
+                            <input name="Id" type="hidden" value=@catalogCategory.Id>
+                        </td>
+                        <td>
+                            @catalogCategory.Category
+                        </td>
+                        <td>
+                            <button asp-controller="Manager"
+                                    asp-action="EditCategoryPage" 
+                                    asp-route-id="@catalogCategory.Id" 
+                                    class="btn esh-basket-checkout"
+                                    type="submit">[ Edit ]
+                        </button>
+                        </td>
+                        <td>
+                            <button asp-controller="Manager"
+                                asp-action="RemoveCategory"
+                                asp-route-id="@catalogCategory.Id" 
+                                class="btn esh-basket-checkout" 
+                                type="submit">[ Remove ]
+                            </button>
+                        </td>
+                    </tr>
+            }
+        </table>
+    }
+
+        <button asp-area="Manager"
+                asp-action="AddCategoryPage"
+                class="btn esh-basket-checkout" 
+                type="submit">[ Add Category ]
+        </button>
+</form>
