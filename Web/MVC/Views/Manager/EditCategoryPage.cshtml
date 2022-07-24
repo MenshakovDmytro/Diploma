@@ -1,0 +1,25 @@
+﻿@model MVC.ViewModels.ManagerViewModels.EditCategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<form asp-controller="Manager"
+      asp-action="EditCategory">
+     <article>
+         <input name="Id" type="hidden" value=@Model.CatalogCategory.Id>
+         <table>
+             <tr>
+                 <th>
+                     Name:
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="Category" value="@Model.CatalogCategory.Category">
+                 </td>
+             </tr>
+         </table>
+     </article>
+     <button class="btn esh-basket-checkout" 
+             type="submit">[ Accept ]
+     </button>
+</form>
