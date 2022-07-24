@@ -8,13 +8,21 @@
       asp-action="EditItem">
      <article>
          <input name="Id" type="hidden" value=@Model.CatalogItem.Id>
-         <table style="tr td size = 50">
+         <table>
+             <tr>
+                 <th>
+                     PictureUrl:
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="PictureFileName" value="@Model.PictureFileName">
+                 </td>
+             </tr>
              <tr>
                  <th>
                      Name:
                  </th>
                  <td>
-                     <input type="text" size="50" name="Name" value="@Model.CatalogItem.Name">
+                     <input type="text" size="50" required="required" name="Name" value="@Model.CatalogItem.Name">
                  </td>
              </tr>
              <tr>
@@ -22,7 +30,7 @@
                      Description
                  </th>
                  <td>
-                     <input type="text" size="50" name="Description" value="@Model.CatalogItem.Description">
+                     <textarea name="Description" required="required" rows="4" cols="50" style="resize:none;">@Model.CatalogItem.Description</textarea>
                  </td>
              </tr>
              <tr>
@@ -52,7 +60,7 @@
                      Price
                  </th>
                  <td>
-                     <input type="text" name="Price" value="@Model.CatalogItem.Price.ToString()">
+                     <input type="text" required="required" name="Price" value="@Model.CatalogItem.Price.ToString()">
                  </td>
              </tr>
          </table>
