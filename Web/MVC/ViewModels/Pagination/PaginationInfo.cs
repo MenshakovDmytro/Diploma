@@ -9,6 +9,6 @@ public class PaginationInfo
     public int? CategoryFilter { get; set; }
     public int? MechanicFilter { get; set; }
     public int? Sort { get; set; }
-    public string Previous { get; set; }
-    public string Next { get; set; }
+    public string Previous { get; set; } = null!;
+    public string Next { get; set; } = null!;
 }
