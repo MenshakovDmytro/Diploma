@@ -1,11 +1,11 @@
-﻿using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Response;
+﻿namespace Catalog.Host.Services.Interfaces;
 
-namespace Catalog.Host.Services.Interfaces;
+using Catalog.Host.Models.Dtos;
+using Catalog.Host.Models.Response;
 
 public interface ICatalogCategoryService
 {
-    Task<AddCategoryResponse<int?>> AddAsync(string name);
+    Task<AddResponse<int?>> AddAsync(string name);
     Task<RemoveCategoryResponse<int?>> RemoveAsync(int id);
     Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name);
     Task<ItemsListResponse<CatalogCategoryDto>> GetCategoriesAsync();

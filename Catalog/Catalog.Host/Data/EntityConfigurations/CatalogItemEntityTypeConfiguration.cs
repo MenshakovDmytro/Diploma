@@ -1,6 +1,6 @@
-using Catalog.Host.Data.Entities;
-
 namespace Catalog.Host.Data.EntityConfigurations;
+
+using Catalog.Host.Data.Entities;
 
 public class CatalogItemEntityTypeConfiguration
     : IEntityTypeConfiguration<CatalogItem>

@@ -1,11 +1,11 @@
+namespace Catalog.Host.Controllers;
+
 using Microsoft.AspNetCore.Authorization;
 using Infrastructure.Identity;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Services.Interfaces;
 using Catalog.Host.Models.Dtos;
-
-namespace Catalog.Host.Controllers;
 
 [ApiController]
 [Authorize(Policy = AuthPolicy.AllowClientPolicy)]
@@ -36,7 +36,7 @@ public class CatalogCategoryController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(AddCategoryResponse<int?>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AddResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateCategoryRequest request)
     {
         var result = await _catalogCategoryService.AddAsync(request.Name);
@@ -45,7 +45,7 @@ public class CatalogCategoryController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(RemoveCategoryResponse<int?>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Remove(RemoveCategoryRequest request)
+    public async Task<IActionResult> Remove(RemoveRequest request)
     {
         var result = await _catalogCategoryService.RemoveAsync(request.Id);
         return Ok(result);

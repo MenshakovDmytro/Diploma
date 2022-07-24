@@ -1,7 +1,7 @@
-﻿using Catalog.Host.Data;
-using Catalog.Host.Data.Entities;
+﻿namespace Catalog.Host.Repositories.Interfaces;
 
-namespace Catalog.Host.Repositories.Interfaces;
+using Catalog.Host.Data;
+using Catalog.Host.Data.Entities;
 
 public interface ICatalogCategoryRepository
 {

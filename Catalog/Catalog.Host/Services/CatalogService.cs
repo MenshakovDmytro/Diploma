@@ -1,11 +1,11 @@
+namespace Catalog.Host.Services;
+
 using Catalog.Host.Data;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Enums;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Repositories.Interfaces;
 using Catalog.Host.Services.Interfaces;
-
-namespace Catalog.Host.Services;
 
 public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogService
 {
@@ -32,14 +32,14 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
 
             if (filters != null)
             {
-                if (filters.TryGetValue(CatalogTypeFilter.Category, out var brand))
+                if (filters.TryGetValue(CatalogTypeFilter.Category, out var category))
                 {
-                    categoryFilter = brand;
+                    categoryFilter = category;
                 }
 
-                if (filters.TryGetValue(CatalogTypeFilter.Mechanic, out var type))
+                if (filters.TryGetValue(CatalogTypeFilter.Mechanic, out var mechanic))
                 {
-                    mechanicFilter = type;
+                    mechanicFilter = mechanic;
                 }
             }
 

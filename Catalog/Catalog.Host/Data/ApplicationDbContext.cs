@@ -1,7 +1,7 @@
+namespace Catalog.Host.Data;
+
 using Catalog.Host.Data.Entities;
 using Catalog.Host.Data.EntityConfigurations;
-
-namespace Catalog.Host.Data;
 
 public class ApplicationDbContext : DbContext
 {

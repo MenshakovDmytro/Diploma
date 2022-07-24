@@ -1,8 +1,8 @@
+namespace Catalog.Host.Mapping;
+
 using Catalog.Host.Configurations;
 using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Dtos;
-
-namespace Catalog.Host.Mapping;
 
 public class CatalogItemPictureResolver : IMemberValueResolver<CatalogItem, CatalogItemDto, string, object>
 {

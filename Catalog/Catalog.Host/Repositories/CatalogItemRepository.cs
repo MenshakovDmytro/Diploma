@@ -1,9 +1,9 @@
+namespace Catalog.Host.Repositories;
+
 using Catalog.Host.Data;
 using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Enums;
 using Catalog.Host.Repositories.Interfaces;
-
-namespace Catalog.Host.Repositories;
 
 public class CatalogItemRepository : ICatalogItemRepository
 {
@@ -14,12 +14,13 @@ public class CatalogItemRepository : ICatalogItemRepository
         _dbContext = dbContextWrapper.DbContext;
     }
 
-    public async Task<int?> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
+    public async Task<int?> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
         var item = await _dbContext.AddAsync(new CatalogItem
         {
             CatalogCategoryId = catalogCategoryId,
             CatalogMechanicId = catalogMechanicId,
+            PictureFileName = pictureFileName,
             Description = description,
             Name = name,
             Price = price
@@ -41,7 +42,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         return result.Entity.Id;
     }
 
-    public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
+    public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
         var item = await _dbContext.CatalogItems
             .FirstOrDefaultAsync(f => f.Id == id);
@@ -50,6 +51,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         {
             item.CatalogCategoryId = catalogCategoryId;
             item.CatalogMechanicId = catalogMechanicId;
+            item.PictureFileName = pictureFileName;
             item.Description = description;
             item.Name = name;
             item.Price = price;

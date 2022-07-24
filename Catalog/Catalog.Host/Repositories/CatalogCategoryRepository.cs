@@ -1,9 +1,8 @@
-﻿using Catalog.Host.Data;
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Models.Response;
-using Catalog.Host.Repositories.Interfaces;
+﻿namespace Catalog.Host.Repositories;
 
-namespace Catalog.Host.Repositories;
+using Catalog.Host.Data;
+using Catalog.Host.Data.Entities;
+using Catalog.Host.Repositories.Interfaces;
 
 public class CatalogCategoryRepository : ICatalogCategoryRepository
 {

@@ -1,6 +1,6 @@
-using Catalog.Host.Data.Entities;
-
 namespace Catalog.Host.Data;
+
+using Catalog.Host.Data.Entities;
 
 public static class DbInitializer
 {
@@ -59,7 +59,7 @@ public static class DbInitializer
         {
             new CatalogItem { CatalogCategoryId = 1, CatalogMechanicId = 2, Description = "In 10 Minute Heist: The Wizard's Tower, players take turns moving their pawns from room to room stealing items. Players compete for most paintings, artifacts, jewels, and fossils.", Name = "10 Minute Heist: The Wizard's Tower", Price = 9.55M, PictureFileName = "1.png" },
             new CatalogItem { CatalogCategoryId = 1, CatalogMechanicId = 1, Description = "13 Days: The Cuban Missile Crisis is a nail-biting, theme saturated two-player strategy game about the Cuban Missile Crisis. Your fate is determined by how well you deal with the inherent dilemmas of the game, and the conflict.", Name = "13 Days: The Cuban Missile Crisis", Price = 20.50M, PictureFileName = "2.png" },
-            new CatalogItem { CatalogCategoryId = 1, CatalogMechanicId = 1, Description = "2 de Mayo is an abstract game of the terrible incidents that took place in Madrid on May 2, 1808. On that date, civilians in Madrid — and a few Spanish army units — rebelled against the French occupation troops of Napoleon.", Name = "2 de Mayo", Price = 50.35M, PictureFileName = "3.png" },
+            new CatalogItem { CatalogCategoryId = 1, CatalogMechanicId = 1, Description = "2 de Mayo is an abstract game of the terrible incidents that took place in Madrid on May 2, 1808. On that date, civilians in Madrid and a few Spanish army units rebelled against the French occupation troops of Napoleon.", Name = "2 de Mayo", Price = 50.35M, PictureFileName = "3.png" },
             new CatalogItem { CatalogCategoryId = 1, CatalogMechanicId = 1, Description = "In 4 gods, you and your opponents simultaneously create a world's geography and religious landscape by placing tiles, incarnating prophets, and establishing legendary cities", Name = "4 Gods", Price = 29.99M, PictureFileName = "4.png" },
             new CatalogItem { CatalogCategoryId = 2, CatalogMechanicId = 3, Description = "One of the players controls the Hero, a castaway spacefarer exploring an unknown map full of dangers, trying to complete missions, while up to 3 Evil Masterminds plot in the darkness, trying to kill them", Name = "Alone", Price = 40.59M, PictureFileName = "5.png" },
             new CatalogItem { CatalogCategoryId = 2, CatalogMechanicId = 3, Description = "Arkham Horror is a cooperative adventure game themed around H.P Lovecraft's Cthulhu Mythos. Players can select from 16 unique playable investigator characters, each with unique abilities, and will square off against the diabolical servants of 8 Ancient Ones", Name = "Arkham Horror", Price = 29.39M, PictureFileName = "6.png" },

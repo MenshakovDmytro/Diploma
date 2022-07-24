@@ -1,11 +1,11 @@
+namespace Catalog.Host.Controllers;
+
 using Microsoft.AspNetCore.Authorization;
 using Infrastructure.Identity;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Services.Interfaces;
 using Catalog.Host.Models.Dtos;
-
-namespace Catalog.Host.Controllers;
 
 [ApiController]
 [Authorize(Policy = AuthPolicy.AllowClientPolicy)]
@@ -36,16 +36,16 @@ public class CatalogItemController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AddResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateProductRequest request)
     {
-        var result = await _catalogItemService.AddAsync(request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId);
+        var result = await _catalogItemService.AddAsync(request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
         return Ok(result);
     }
 
     [HttpPost]
     [ProducesResponseType(typeof(RemoveItemResponse<int?>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Remove(RemoveProductRequest request)
+    public async Task<IActionResult> Remove(RemoveRequest request)
     {
         var result = await _catalogItemService.RemoveAsync(request.Id);
         return Ok(result);
@@ -55,7 +55,7 @@ public class CatalogItemController : ControllerBase
     [ProducesResponseType(typeof(UpdateItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Update(UpdateProductRequest request)
     {
-        var result = await _catalogItemService.UpdateAsync(request.Id, request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId);
+        var result = await _catalogItemService.UpdateAsync(request.Id, request.Name, request.Description, request.Price, request.CatalogCategoryId, request.CatalogMechanicId, request.PictureFileName);
         return Ok(result);
     }
 }

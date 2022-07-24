@@ -1,10 +1,10 @@
+namespace Catalog.Host.Controllers;
+
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Enums;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Services.Interfaces;
-
-namespace Catalog.Host.Controllers;
 
 [ApiController]
 [Route(ComponentDefaults.DefaultRoute)]

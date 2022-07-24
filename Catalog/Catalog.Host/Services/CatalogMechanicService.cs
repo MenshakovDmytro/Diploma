@@ -1,10 +1,10 @@
-﻿using Catalog.Host.Data;
+﻿namespace Catalog.Host.Services;
+
+using Catalog.Host.Data;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Repositories.Interfaces;
 using Catalog.Host.Services.Interfaces;
-
-namespace Catalog.Host.Services;
 
 public class CatalogMechanicService : BaseDataService<ApplicationDbContext>, ICatalogMechanicService
 {
@@ -22,12 +22,12 @@ public class CatalogMechanicService : BaseDataService<ApplicationDbContext>, ICa
         _mapper = mapper;
     }
 
-    public async Task<AddMechanicResponse<int?>> AddAsync(string name)
+    public async Task<AddResponse<int?>> AddAsync(string name)
     {
         return await ExecuteSafeAsync(async () =>
         {
             var result = await _catalogMechanicRepository.AddAsync(name);
-            return new AddMechanicResponse<int?>()
+            return new AddResponse<int?>()
             {
                 Id = result
             };

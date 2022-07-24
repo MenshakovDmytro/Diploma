@@ -1,10 +1,10 @@
+namespace Catalog.Host.Services;
+
 using Catalog.Host.Data;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Repositories.Interfaces;
 using Catalog.Host.Services.Interfaces;
-
-namespace Catalog.Host.Services;
 
 public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalogItemService
 {
@@ -22,12 +22,12 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
         _mapper = mapper;
     }
 
-    public async Task<AddItemResponse<int?>> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
+    public async Task<AddResponse<int?>> AddAsync(string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
         return await ExecuteSafeAsync(async () =>
         {
-            var result = await _catalogItemRepository.AddAsync(name, description, price, catalogCategoryId, catalogMechanicId);
-            return new AddItemResponse<int?>()
+            var result = await _catalogItemRepository.AddAsync(name, description, price, catalogCategoryId, catalogMechanicId, pictureFileName);
+            return new AddResponse<int?>()
             {
                 Id = result
             };
@@ -46,11 +46,11 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
         });
     }
 
-    public async Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId)
+    public async Task<UpdateCategoryResponse<int?>> UpdateAsync(int id, string name, string description, decimal price, int catalogCategoryId, int catalogMechanicId, string pictureFileName)
     {
         return await ExecuteSafeAsync(async () =>
         {
-            var result = await _catalogItemRepository.UpdateAsync(id, name, description, price, catalogCategoryId, catalogMechanicId);
+            var result = await _catalogItemRepository.UpdateAsync(id, name, description, price, catalogCategoryId, catalogMechanicId, pictureFileName);
             return new UpdateCategoryResponse<int?>()
             {
                 Id = result

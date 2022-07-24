@@ -1,10 +1,10 @@
-﻿using Catalog.Host.Data;
+﻿namespace Catalog.Host.Services;
+
+using Catalog.Host.Data;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Response;
 using Catalog.Host.Repositories.Interfaces;
 using Catalog.Host.Services.Interfaces;
-
-namespace Catalog.Host.Services;
 
 public class CatalogCategoryService : BaseDataService<ApplicationDbContext>, ICatalogCategoryService
 {
@@ -22,12 +22,12 @@ public class CatalogCategoryService : BaseDataService<ApplicationDbContext>, ICa
         _mapper = mapper;
     }
 
-    public async Task<AddCategoryResponse<int?>> AddAsync(string name)
+    public async Task<AddResponse<int?>> AddAsync(string name)
     {
         return await ExecuteSafeAsync(async () =>
         {
             var result = await _catalogCategoryRepository.AddAsync(name);
-            return new AddCategoryResponse<int?>()
+            return new AddResponse<int?>()
             {
                 Id = result
             };
