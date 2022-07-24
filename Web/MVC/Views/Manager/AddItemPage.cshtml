@@ -1,0 +1,72 @@
+﻿@model MVC.ViewModels.ManagerViewModels.AddItemViewModel
+
+@{
+    ViewData["Title"] = "Add Item";
+}
+
+<form asp-controller="Manager"
+      asp-action="AddItem">
+     <article>
+         <table>
+             <tr>
+                 <th>
+                     PictureUrl
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="PictureFileName">
+                 </td>
+             </tr>
+             <tr>
+                 <th>
+                     Name:
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="Name">
+                 </td>
+             </tr>
+             <tr>
+                 <th>
+                     Description
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="Description">
+                 </td>
+             </tr>
+             <tr>
+                 <th>
+                     Category
+                 </th>
+                 <td>
+                     <select asp-for="@Model.CategoryId"
+                             asp-items="@Model.Categories"
+                             value="@Model.Categories">
+                     </select>
+                 </td>
+             </tr>
+             <tr>
+                 <th>
+                     Mechanic
+                 </th>
+                 <td>
+                     <select asp-for="@Model.MechanicId" 
+                             asp-items="@Model.Mechanics"
+                             value="@Model.Mechanics">
+                     </select>
+                 </td>
+             </tr>
+             <tr>
+                 <th>
+                     Price
+                 </th>
+                 <td>
+                     <input type="text" required="required" name="Price">
+                 </td>
+             </tr>
+         </table>
+     </article>
+     <input name="CategoryId" type="hidden" value=@Model.CategoryId>
+	 <input name="MechanicId" type="hidden" value=@Model.MechanicId>
+     <button class="btn esh-basket-checkout" 
+             type="submit">[ Accept ]
+     </button>
+</form>
