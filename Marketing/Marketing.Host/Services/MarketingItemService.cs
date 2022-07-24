@@ -1,11 +1,10 @@
-﻿using Marketing.Host.Data;
-using Marketing.Host.Data.Entities;
+﻿namespace Marketing.Host.Services;
+
+using Marketing.Host.Data;
 using Marketing.Host.Models.Dtos;
 using Marketing.Host.Models.Responses;
 using Marketing.Host.Repositories.Interfaces;
 using Marketing.Host.Services.Interfaces;
-
-namespace Marketing.Host.Services;
 
 public class MarketingItemService : BaseDataService<ApplicationDbContext>, IMarketingItemService
 {
@@ -62,7 +61,7 @@ public class MarketingItemService : BaseDataService<ApplicationDbContext>, IMark
             var result = await _marketingItemRepository.RemoveByUserId(userId);
             return new RemoveReviewResponse<int?>()
             {
-               Id= result
+               Id = result
             };
         });
     }

@@ -1,7 +1,7 @@
-﻿using Marketing.Host.Data.Entities;
-using Marketing.Host.Models.Dtos;
+﻿namespace Marketing.Host.Mapping;
 
-namespace Marketing.Host.Mapping;
+using Marketing.Host.Data.Entities;
+using Marketing.Host.Models.Dtos;
 
 public class MappingProfile : Profile
 {

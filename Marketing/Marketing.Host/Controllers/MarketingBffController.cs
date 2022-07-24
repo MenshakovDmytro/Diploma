@@ -1,9 +1,9 @@
+namespace Marketing.Host.Controllers;
+
 using Marketing.Host.Models.Dtos;
 using Marketing.Host.Models.Requests;
 using Marketing.Host.Models.Responses;
 using Marketing.Host.Services.Interfaces;
-
-namespace Marketing.Host.Controllers;
 
 [ApiController]
 [Route(ComponentDefaults.DefaultRoute)]

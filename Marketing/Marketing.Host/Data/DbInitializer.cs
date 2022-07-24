@@ -1,6 +1,6 @@
-﻿using Marketing.Host.Data.Entities;
+﻿namespace Marketing.Host.Data;
 
-namespace Marketing.Host.Data;
+using Marketing.Host.Data.Entities;
 
 public static class DbInitializer
 {

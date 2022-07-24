@@ -1,7 +1,7 @@
-﻿using Marketing.Host.Models.Dtos;
-using Marketing.Host.Models.Responses;
+﻿namespace Marketing.Host.Services.Interfaces;
 
-namespace Marketing.Host.Services.Interfaces;
+using Marketing.Host.Models.Dtos;
+using Marketing.Host.Models.Responses;
 
 public interface IMarketingItemService
 {

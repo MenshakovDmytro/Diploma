@@ -1,6 +1,6 @@
-﻿using Marketing.Host.Data.Entities;
+﻿namespace Marketing.Host.Data.EntityConfigurations;
 
-namespace Marketing.Host.Data.EntityConfigurations;
+using Marketing.Host.Data.Entities;
 
 public class MarketingItemEntityTypeConfiguration
     : IEntityTypeConfiguration<MarketingItem>

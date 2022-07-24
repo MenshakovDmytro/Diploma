@@ -1,7 +1,7 @@
-﻿using Marketing.Host.Data.Entities;
-using Marketing.Host.Data.EntityConfigurations;
+﻿namespace Marketing.Host.Data;
 
-namespace Marketing.Host.Data;
+using Marketing.Host.Data.Entities;
+using Marketing.Host.Data.EntityConfigurations;
 
 public class ApplicationDbContext : DbContext
 {

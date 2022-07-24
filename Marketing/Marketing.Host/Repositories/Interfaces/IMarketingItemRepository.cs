@@ -1,7 +1,7 @@
-﻿using Marketing.Host.Data.Entities;
-using Marketing.Host.Models.Responses;
+﻿namespace Marketing.Host.Repositories.Interfaces;
 
-namespace Marketing.Host.Repositories.Interfaces;
+using Marketing.Host.Data.Entities;
+using Marketing.Host.Models.Responses;
 
 public interface IMarketingItemRepository
 {
