@@ -1,7 +1,7 @@
-﻿using MVC.Services.Interfaces;
-using MVC.ViewModels.MarketingViewModels;
+﻿namespace MVC.ViewComponents;
 
-namespace MVC.ViewComponents;
+using MVC.Services.Interfaces;
+using MVC.ViewModels.MarketingViewModels;
 
 public class MarketingList : ViewComponent
 {

@@ -1,23 +1,24 @@
 namespace MVC.ViewModels;
 
-// Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser
 {
-    public string Role { get; set; }
-    public string CardNumber { get; set; }
-    public string SecurityNumber { get; set; }
-    public string Expiration { get; set; }
-    public string CardHolderName { get; set; }
+    public string Role { get; set; } = null!;
+    public string CardNumber { get; set; } = null!;
+    public string SecurityNumber { get; set; } = null!;
+    public string Expiration { get; set; } = null!;
+    public string CardHolderName { get; set; } = null!;
     public int CardType { get; set; }
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string StateCode { get; set; }
-    public string Country { get; set; }
-    public string CountryCode { get; set; }
-    public string ZipCode { get; set; }
+    public string Street { get; set; } = null!;
+    public string City { get; set; } = null!;
+    public string State { get; set; } = null!;
+    public string StateCode { get; set; } = null!;
+    public string Country { get; set; } = null!;
+    public string CountryCode { get; set; } = null!;
+    public string ZipCode { get; set; } = null!;
     public double Latitude { get; set; }
     public double Longitude { get; set; }
-    [Required] public string Name { get; set; }
-    [Required] public string LastName { get; set; }
+    [Required]
+    public string Name { get; set; } = null!;
+    [Required]
+    public string LastName { get; set; } = null!;
 }

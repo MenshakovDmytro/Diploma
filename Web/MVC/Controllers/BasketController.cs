@@ -1,19 +1,19 @@
-﻿using MVC.Services.Interfaces;
-using MVC.ViewModels;
+﻿namespace MVC.Controllers;
 
-namespace MVC.Controllers;
+using MVC.Services.Interfaces;
+using MVC.ViewModels;
 
 public class BasketController : Controller
 {
     private readonly IBasketService _basketService;
-    private readonly ILogger<AccountController> _logger;
     private readonly IIdentityParser<ApplicationUser> _appUserParser;
 
-    public BasketController(IBasketService basketService, IIdentityParser<ApplicationUser> appUserParser, ILogger<AccountController> logger)
+    public BasketController(
+        IBasketService basketService,
+        IIdentityParser<ApplicationUser> appUserParser)
     {
         _basketService = basketService;
         _appUserParser = appUserParser;
-        _logger = logger;
     }
 
     public async Task<IActionResult> Index()

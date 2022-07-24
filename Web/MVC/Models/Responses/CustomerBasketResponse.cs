@@ -1,6 +1,6 @@
-﻿using MVC.ViewModels;
+﻿namespace MVC.Models.Responses;
 
-namespace MVC.Models.Responses;
+using MVC.ViewModels;
 
 public class CustomerBasketResponse
 {

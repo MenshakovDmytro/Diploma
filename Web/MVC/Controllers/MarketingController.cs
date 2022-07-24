@@ -1,7 +1,7 @@
-﻿using MVC.Services.Interfaces;
-using MVC.ViewModels;
+﻿namespace MVC.Controllers;
 
-namespace MVC.Controllers;
+using MVC.Services.Interfaces;
+using MVC.ViewModels;
 
 public class MarketingController : Controller
 {

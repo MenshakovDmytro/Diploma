@@ -1,7 +1,7 @@
-﻿using MVC.Models.Responses;
-using MVC.ViewModels;
+﻿namespace MVC.Services.Interfaces;
 
-namespace MVC.Services.Interfaces;
+using MVC.Models.Responses;
+using MVC.ViewModels;
 
 public interface IBasketService
 {

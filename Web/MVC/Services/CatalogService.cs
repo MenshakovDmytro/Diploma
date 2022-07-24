@@ -1,18 +1,20 @@
-﻿using MVC.Models.Enums;
+﻿namespace MVC.Services;
+
+using MVC.Models.Enums;
 using MVC.Models.Requests;
 using MVC.Models.Response;
 using MVC.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
-namespace MVC.Services;
-
 public class CatalogService : ICatalogService
 {
     private readonly IOptions<AppSettings> _settings;
     private readonly IHttpClientService _httpClient;
 
-    public CatalogService(IHttpClientService httpClient, IOptions<AppSettings> settings)
+    public CatalogService(
+        IHttpClientService httpClient,
+        IOptions<AppSettings> settings)
     {
         _httpClient = httpClient;
         _settings = settings;
@@ -26,21 +28,22 @@ public class CatalogService : ICatalogService
         {
             filters.Add(CatalogTypeFilter.Category, category.Value);
         }
-        
+
         if (mechanic.HasValue)
         {
             filters.Add(CatalogTypeFilter.Mechanic, mechanic.Value);
         }
-        
-        var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/Items",
-           HttpMethod.Post, 
-           new PaginatedItemsRequest<CatalogTypeFilter>()
-           {
+
+        var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>(
+            $"{_settings.Value.CatalogUrl}/Items",
+            HttpMethod.Post,
+            new PaginatedItemsRequest<CatalogTypeFilter>()
+            {
                 PageIndex = page,
                 PageSize = take,
                 Filters = filters,
                 Sort = sort
-           });
+            });
 
         return result;
     }
@@ -89,7 +92,8 @@ public class CatalogService : ICatalogService
 
     public async Task<GetItemResponse<CatalogItem>> GetItem(int id)
     {
-        var result = await _httpClient.SendAsync<GetItemResponse<CatalogItem>, GetItemRequest<int>?>($"{_settings.Value.CatalogUrl}/GetItem",
+        var result = await _httpClient.SendAsync<GetItemResponse<CatalogItem>, GetItemRequest<int>?>(
+            $"{_settings.Value.CatalogUrl}/GetItem",
             HttpMethod.Post,
             new GetItemRequest<int>
             {

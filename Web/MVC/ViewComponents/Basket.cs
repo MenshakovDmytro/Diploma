@@ -1,8 +1,8 @@
-﻿using MVC.Services.Interfaces;
+﻿namespace MVC.ViewComponents;
+
+using MVC.Services.Interfaces;
 using MVC.ViewModels;
 using MVC.ViewModels.BasketViewModels;
-
-namespace MVC.ViewComponents;
 
 public class Basket : ViewComponent
 {

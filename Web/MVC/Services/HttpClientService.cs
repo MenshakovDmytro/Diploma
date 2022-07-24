@@ -1,9 +1,8 @@
+namespace MVC.Services;
+
 using IdentityModel.Client;
-using Infrastructure.Configuration;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
-
-namespace MVC.Services;
 
 public class HttpClientService : IHttpClientService
 {
@@ -22,7 +21,9 @@ public class HttpClientService : IHttpClientService
     {
         var client = _clientFactory.CreateClient();
 
+#pragma warning disable CS8604 // Possible null reference argument.
         var token = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+#pragma warning restore CS8604 // Possible null reference argument.
         if (!string.IsNullOrEmpty(token))
         {
             client.SetBearerToken(token);

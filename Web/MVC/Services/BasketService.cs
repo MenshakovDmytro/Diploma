@@ -1,9 +1,9 @@
-﻿using MVC.Models.Requests;
+﻿namespace MVC.Services;
+
+using MVC.Models.Requests;
 using MVC.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
-
-namespace MVC.Services;
 
 public class BasketService : IBasketService
 {
@@ -20,12 +20,13 @@ public class BasketService : IBasketService
 
     public async Task<CustomerBasket> GetBasket(ApplicationUser user)
     {
-        var result = await _httpClient.SendAsync<CustomerBasket, GetBasketRequest>($"{_settings.Value.BasketUrl}/GetBasket",
-        HttpMethod.Post,
-        new GetBasketRequest()
-        {
-            Id = user.Id
-        });
+        var result = await _httpClient.SendAsync<CustomerBasket, GetBasketRequest>(
+            $"{_settings.Value.BasketUrl}/GetBasket",
+            HttpMethod.Post,
+            new GetBasketRequest()
+            {
+                Id = user.Id
+            });
 
         return result == null ?
             new CustomerBasket()
@@ -34,51 +35,55 @@ public class BasketService : IBasketService
 
     public async Task<AddItemResponse<bool>> AddToBasket(ApplicationUser user, BasketItem basketItem)
     {
-        var result = await _httpClient.SendAsync<AddItemResponse<bool>, AddBasketItemRequest>($"{_settings.Value.BasketUrl}/AddToBasket",
-        HttpMethod.Post,
-        new AddBasketItemRequest()
-        {
-            Id = user.Id,
-            BasketItem = basketItem
-        });
+        var result = await _httpClient.SendAsync<AddItemResponse<bool>, AddBasketItemRequest>(
+            $"{_settings.Value.BasketUrl}/AddToBasket",
+            HttpMethod.Post,
+            new AddBasketItemRequest()
+            {
+                Id = user.Id,
+                BasketItem = basketItem
+            });
 
         return result;
     }
+
     public async Task<RemoveFromBasketResponse> RemoveFromBasket(ApplicationUser user, int itemId)
     {
-        var result = await _httpClient.SendAsync<RemoveFromBasketResponse, RemoveFromBasketRequest>($"{_settings.Value.BasketUrl}/RemoveFromBasket",
-        HttpMethod.Post,
-        new RemoveFromBasketRequest()
-        {
-            Id = user.Id,
-            ItemId = itemId
-        });
+        var result = await _httpClient.SendAsync<RemoveFromBasketResponse, RemoveFromBasketRequest>(
+            $"{_settings.Value.BasketUrl}/RemoveFromBasket",
+            HttpMethod.Post,
+            new RemoveFromBasketRequest()
+            {
+                Id = user.Id,
+                ItemId = itemId
+            });
 
         return result;
     }
-
 
     public async Task<DeleteBasketResponse> DeleteBasket(ApplicationUser user)
     {
-        var result = await _httpClient.SendAsync<DeleteBasketResponse, DeleteBasketRequest>($"{_settings.Value.BasketUrl}/DeleteBasket",
-        HttpMethod.Post,
-        new DeleteBasketRequest()
-        {
-            Id = user.Id
-        });
+        var result = await _httpClient.SendAsync<DeleteBasketResponse, DeleteBasketRequest>(
+            $"{_settings.Value.BasketUrl}/DeleteBasket",
+            HttpMethod.Post,
+            new DeleteBasketRequest()
+            {
+                Id = user.Id
+            });
 
         return result;
     }
 
     public async Task<UpdateQuantityResponse> SetQuantities(ApplicationUser user, Dictionary<int, int> quantities)
     {
-        var result = await _httpClient.SendAsync<UpdateQuantityResponse, UpdateQuantityRequest>($"{_settings.Value.BasketUrl}/UpdateQuantity",
-        HttpMethod.Post,
-        new UpdateQuantityRequest()
-        {
-            Id = user.Id,
-            Quantities = quantities
-        });
+        var result = await _httpClient.SendAsync<UpdateQuantityResponse, UpdateQuantityRequest>(
+            $"{_settings.Value.BasketUrl}/UpdateQuantity",
+            HttpMethod.Post,
+            new UpdateQuantityRequest()
+            {
+                Id = user.Id,
+                Quantities = quantities
+            });
 
         return result;
     }
