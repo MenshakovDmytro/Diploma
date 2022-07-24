@@ -1,8 +1,8 @@
-﻿using MVC.Models.Response;
+﻿namespace MVC.Services.Interfaces;
+
+using MVC.Models.Response;
 using MVC.Models.Responses;
 using MVC.ViewModels;
-
-namespace MVC.Services.Interfaces;
 
 public interface IMarketingService
 {
