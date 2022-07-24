@@ -2,13 +2,13 @@
 
 public class AppSettings
 {
-    public string CatalogUrl { get; set; }
-    public string BasketUrl { get; set; }
-    public string MarketingUrl { get; set; }
-    public string CatalogItemUrl { get; set; }
-    public string CatalogCategoryUrl { get; set; }
-    public string CatalogMechanicUrl { get; set; }
-    public int SessionCookieLifetimeMinutes { get; set; }    
-    public string CallBackUrl { get; set; }
-    public string IdentityUrl { get; set; }
+    public string CatalogUrl { get; set; } = null!;
+    public string BasketUrl { get; set; } = null!;
+    public string MarketingUrl { get; set; } = null!;
+    public string CatalogItemUrl { get; set; } = null!;
+    public string CatalogCategoryUrl { get; set; } = null!;
+    public string CatalogMechanicUrl { get; set; } = null!;
+    public int SessionCookieLifetimeMinutes { get; set; }
+    public string CallBackUrl { get; set; } = null!;
+    public string IdentityUrl { get; set; } = null!;
 }
