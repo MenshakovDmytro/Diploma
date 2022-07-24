@@ -81,7 +81,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5002
-      - MvcUrl=http://www.boardgameswebsite.com:5001
+      - MvcUrl=http://www.boardgameswebsite.com
       - CatalogApi=http://www.boardgameswebsite.com:5000
       - BasketApi=http://www.boardgameswebsite.com:5003
       - MarketingApi=http://www.boardgameswebsite.com:5004
