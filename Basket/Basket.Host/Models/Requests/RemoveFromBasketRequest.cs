@@ -1,6 +1,4 @@
-﻿using Basket.Host.Data;
-
-namespace Basket.Host.Models.Requests;
+﻿namespace Basket.Host.Models.Requests;
 
 public class RemoveFromBasketRequest
 {
