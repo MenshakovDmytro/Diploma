@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Add Category";
+}
+
+<form asp-controller="Manager"
+      asp-action="AddCategory">
+     <article>
+         <table>
+             <tr>
+                 <th>
+                     Category:
+                 </th>
+                 <td>
+                     <input type="text" size="50" required="required" name="Category">
+                 </td>
+             </tr>
+         </table>
+     </article>
+     <button class="btn esh-basket-checkout" 
+             type="submit">[ Accept ]
+     </button>
+</form>
