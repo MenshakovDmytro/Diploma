@@ -1,11 +1,11 @@
+namespace Basket.Host.Controllers;
+
 using Microsoft.AspNetCore.Authorization;
 using Infrastructure.Identity;
 using Basket.Host.Models.Dtos;
 using Basket.Host.Models.Requests;
 using Basket.Host.Models.Responses;
 using Basket.Host.Services.Interfaces;
-
-namespace Basket.Host.Controllers;
 
 [ApiController]
 [Authorize(Policy = AuthPolicy.AllowEndUserPolicy)]

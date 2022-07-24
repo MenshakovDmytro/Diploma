@@ -1,7 +1,7 @@
-﻿using Basket.Host.Data;
-using Basket.Host.Models.Dtos;
+﻿namespace Basket.Host.Mapping;
 
-namespace Basket.Host.Mapping;
+using Basket.Host.Data;
+using Basket.Host.Models.Dtos;
 
 public class MappingProfile : Profile
 {

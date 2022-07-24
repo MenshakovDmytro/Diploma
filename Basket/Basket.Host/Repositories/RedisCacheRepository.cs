@@ -1,8 +1,8 @@
-﻿using StackExchange.Redis;
+﻿namespace Basket.Host.Repositories;
+
+using StackExchange.Redis;
 using Basket.Host.Repositories.Interfaces;
 using Basket.Host.Data;
-
-namespace Basket.Host.Repositories;
 
 public class RedisCacheRepository : ICacheRepository
 {

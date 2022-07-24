@@ -1,10 +1,10 @@
+namespace Basket.Host.Services;
+
 using Basket.Host.Data;
 using Basket.Host.Models.Dtos;
 using Basket.Host.Models.Responses;
 using Basket.Host.Repositories.Interfaces;
 using Basket.Host.Services.Interfaces;
-
-namespace Basket.Host.Services;
 
 public class BasketService : IBasketService
 {

@@ -1,8 +1,8 @@
+namespace Basket.Host.Services.Interfaces;
+
 using Basket.Host.Data;
 using Basket.Host.Models.Dtos;
 using Basket.Host.Models.Responses;
-
-namespace Basket.Host.Services.Interfaces;
 
 public interface IBasketService
 {

@@ -1,6 +1,6 @@
-﻿using Basket.Host.Data;
+﻿namespace Basket.Host.Models.Requests;
 
-namespace Basket.Host.Models.Requests;
+using Basket.Host.Data;
 
 public class AddItemRequest
 {

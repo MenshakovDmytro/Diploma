@@ -1,6 +1,6 @@
-﻿using Basket.Host.Data;
+﻿namespace Basket.Host.Repositories.Interfaces;
 
-namespace Basket.Host.Repositories.Interfaces;
+using Basket.Host.Data;
 
 public interface ICacheRepository
 {
