@@ -5,7 +5,8 @@
 }
 
 <form asp-controller="Manager"
-      asp-action="EditCategory">
+      asp-action="EditCategory"
+      method="post">
      <article>
          <input name="Id" type="hidden" value=@Model.CatalogCategory.Id>
          <table>

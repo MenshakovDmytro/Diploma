@@ -5,7 +5,8 @@
 }
 
 <form asp-controller="Manager"
-      asp-action="EditMechanic">
+      asp-action="EditMechanic"
+      method="post">
      <article>
          <input name="Id" type="hidden" value=@Model.CatalogMechanic.Id>
          <table>

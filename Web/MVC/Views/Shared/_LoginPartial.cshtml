@@ -49,13 +49,14 @@
     </section>
 
     <section class="col-lg-1 col-xs-12">
-        @await Component.InvokeAsync("Basket", new { user = UserManager.Parse(User) })
-
         @if(User.Claims.FirstOrDefault(f => f.Type == JwtClaimTypes.Role).Value.Equals("manager"))
         {
             <img src="~/images/manager.png" />
         }
-
+        else
+        {
+            @await Component.InvokeAsync("Basket", new { user = UserManager.Parse(User) })
+        }
     </section>
 }
 else
